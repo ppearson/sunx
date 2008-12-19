@@ -1,0 +1,29 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {openPreferencesWindow = id; }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = GraphView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            ACTIONS = {Calculate = id; UpdateDuration = id; UpdateLocation = id; }; 
+            CLASS = MySun; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                AngleView = SunView; 
+                Date1 = id; 
+                Duration1 = id; 
+                GraphView1 = GraphView; 
+                Location = id; 
+                TargetTime = id; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = NSDatePicker; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = SunView; LANGUAGE = ObjC; SUPERCLASS = NSView; }
+    ); 
+    IBVersion = 1; 
+}

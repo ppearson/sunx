@@ -1,0 +1,26 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                cancelAddWindow = id; 
+                endAddWindow = id; 
+                raiseAddWindow = id; 
+                removeLocation = id; 
+            }; 
+            CLASS = PrefWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                Lat = id; 
+                Long = id; 
+                Table = id; 
+                TimeZone = id; 
+                Title = id; 
+                addWindow = NSWindow; 
+                prefWindow = NSWindow; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}
