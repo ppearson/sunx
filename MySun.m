@@ -48,9 +48,9 @@
 	if (nLocs > 12)
 		nLocs = 12;
 	
-	[Location setNumberOfVisibleItems:nLocs];
-	
+	[Location setNumberOfVisibleItems:nLocs];	
 	[Location selectItemAtIndex:0];
+	
 	[self Calculate:self];
 }
 
@@ -188,7 +188,7 @@
 		double dSunrise = [self CalcSunriseTimeAngle:nextDate Long:dLong Lat:dLat TZ:strTimeZone];
 		double dSunset = [self CalcSunsetTimeAngle:nextDate Long:dLong Lat:dLat TZ:strTimeZone];
 		
-		GraphValue *value1 = [GraphValue alloc];
+		GraphValue *value1 = [[GraphValue alloc] autorelease];
 		[value1 setYValue:dSunrise];
 		
 		int nTag = -1;
@@ -203,7 +203,7 @@
 		
 		[GraphView1 addSunriseValue:value1];
 		
-		GraphValue *value2 = [GraphValue alloc];
+		GraphValue *value2 = [[GraphValue alloc] autorelease];
 		[value2 setYValue:dSunset];
 		
 		[GraphView1 addSunsetValue:value2];
@@ -214,7 +214,7 @@
 		
 		double dPerc = (dDay / 360.0);
 		
-		GraphValue *value3 = [GraphValue alloc];
+		GraphValue *value3 = [[GraphValue alloc] autorelease];
 		[value3 setYValue:dPerc];
 		
 		[GraphView1 addDaylengthValue:value3];

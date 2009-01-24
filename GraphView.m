@@ -120,33 +120,32 @@
 	
 	///// draw Y axis grid
 	
-	for (k = (int)dMinY; k < (int)dMaxY; k++)
+	int nStartHour = dMinY + 15 - ((int)dMinY % 15);
+
+	for (k = nStartHour; k < (int)dMaxY; k += 15)
 	{
-		if (k % 15 == 0) // on hour
-		{
-			int nHour = k / 15;
-			
-			NSCalendarDate *newDate = [NSCalendarDate dateWithYear:[CalDate yearOfCommonEra] month:[CalDate monthOfYear] day:[CalDate monthOfYear] hour:nHour
-															minute:0 second:0 timeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-			
-			NSString *strTime = [newDate descriptionWithCalendarFormat:@"%H:%M" timeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"] locale:nil];
-			
-			NSBezierPath* YLine = [NSBezierPath bezierPath];
-			
-			double dYValue = (k * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5);
-			[YLine moveToPoint:NSMakePoint(plotArea.origin.x, dYValue)];
-			[YLine lineToPoint:NSMakePoint((plotArea.origin.x + plotArea.size.width), dYValue)];
-			
-			[[NSColor grayColor] set];
-			[YLine stroke];
-			
-			NSMutableDictionary *attributes1 = [NSMutableDictionary dictionary];
-			[attributes1 setObject:[NSFont fontWithName:@"Helvetica" size:11] forKey:NSFontAttributeName];
-			
-			NSSize extent = [strTime sizeWithAttributes:attributes1];
-			
-			[strTime drawAtPoint:NSMakePoint(plotArea.origin.x - extent.width - 3, dYValue - (extent.height / 2.0)) withAttributes:attributes1];
-		}		
+		int nHour = k / 15;
+		
+		NSCalendarDate *newDate = [NSCalendarDate dateWithYear:[CalDate yearOfCommonEra] month:[CalDate monthOfYear] day:[CalDate monthOfYear] hour:nHour
+														minute:0 second:0 timeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+		
+		NSString *strTime = [newDate descriptionWithCalendarFormat:@"%H:%M" timeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"] locale:nil];
+		
+		NSBezierPath* YLine = [NSBezierPath bezierPath];
+		
+		double dYValue = (k * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5);
+		[YLine moveToPoint:NSMakePoint(plotArea.origin.x, dYValue)];
+		[YLine lineToPoint:NSMakePoint((plotArea.origin.x + plotArea.size.width), dYValue)];
+		
+		[[NSColor grayColor] set];
+		[YLine stroke];
+		
+		NSMutableDictionary *attributes1 = [NSMutableDictionary dictionary];
+		[attributes1 setObject:[NSFont fontWithName:@"Helvetica" size:11] forKey:NSFontAttributeName];
+		
+		NSSize extent = [strTime sizeWithAttributes:attributes1];
+		
+		[strTime drawAtPoint:NSMakePoint(plotArea.origin.x - extent.width - 3, dYValue - (extent.height / 2.0)) withAttributes:attributes1];		
 	}
 	
 	double dXPos = dLeftStart + dInc;
@@ -234,6 +233,7 @@
 	[aSunsetData removeAllObjects];
 	
 	[aDaylengthData removeAllObjects];
+	[aTags removeAllObjects];
 	
 	nDaysToShow = nDays;
 }
