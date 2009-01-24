@@ -115,8 +115,6 @@
 	
 	double dYScale = plotArea.size.height / dYRange;
 	
-//	double dYDLScale = plotArea.size.height / 360.0;
-	
 	NSDate *today = [NSDate date];
 	NSCalendarDate *CalDate = [today dateWithCalendarFormat:0 timeZone:0];
 	
@@ -140,11 +138,9 @@
 			[YLine lineToPoint:NSMakePoint((plotArea.origin.x + plotArea.size.width), dYValue)];
 			
 			[[NSColor grayColor] set];
-			
 			[YLine stroke];
 			
-			NSMutableDictionary *attributes1;
-			attributes1 = [[NSMutableDictionary alloc] init];
+			NSMutableDictionary *attributes1 = [NSMutableDictionary dictionary];
 			[attributes1 setObject:[NSFont fontWithName:@"Helvetica" size:11] forKey:NSFontAttributeName];
 			
 			NSSize extent = [strTime sizeWithAttributes:attributes1];
