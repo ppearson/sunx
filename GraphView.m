@@ -220,18 +220,16 @@
 	[[NSColor redColor] set];
 	[pathSS stroke];
 	
-	
 	[[NSColor yellowColor] set];
 	[pathDL stroke];
 	
 	NSBezierPath* CurrentTimeLine = [NSBezierPath bezierPath];
 	
 	double dYValue = ([self getCurrentAngle] * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5);
-	[CurrentTimeLine moveToPoint:NSMakePoint(plotArea.origin.x, dYValue)];
+	[CurrentTimeLine moveToPoint:NSMakePoint(plotArea.origin.x - 30, dYValue)];
 	[CurrentTimeLine lineToPoint:NSMakePoint((plotArea.origin.x + plotArea.size.width), dYValue)];
 	
 	[[NSColor greenColor] set];
-	
 	[CurrentTimeLine stroke];
 }
 
