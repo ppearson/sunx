@@ -177,12 +177,12 @@
 	
 	[GraphView1 Reset:nNumDaysFuture];
 	
+	NSCalendarDate *nextDate = CalDate;
+	
 	int i = 0;
 	
 	for (i = 0; i < nNumDaysFuture; i++)
-	{
-		NSCalendarDate *nextDate = CalDate;
-		
+	{		
 		nextDate = [CalDate dateByAddingYears:0 months:0 days:i hours:0 minutes:0 seconds:0];
 		
 		double dSunrise = [self CalcSunriseTimeAngle:nextDate Long:dLong Lat:dLat TZ:strTimeZone];

@@ -120,7 +120,7 @@ static LocationController *sharedInstance = nil;
 
 - (void)addLocation:(NSString *)title Lat:(double)dLat Long:(double)dLong TZ:(NSString *)timezone
 {
-	LocationValue *loc1 = [LocationValue alloc];
+	LocationValue *loc1 = [[LocationValue alloc] autorelease];
 	
 	title = [title copy];
 	[loc1 setTitle:title];
