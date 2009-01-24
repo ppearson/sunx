@@ -201,8 +201,7 @@
 			
 			NSString *strTagText = [self getTag:nTag];
 			
-			NSMutableDictionary *attributes1;
-			attributes1 = [[NSMutableDictionary alloc] init];
+			NSMutableDictionary *attributes1 = [NSMutableDictionary dictionary];
 			[attributes1 setObject:[NSFont fontWithName:@"Helvetica" size:11] forKey:NSFontAttributeName];
 			
 			[strTagText drawAtPoint:NSMakePoint(dXPos, plotArea.origin.y - 15) withAttributes:attributes1];

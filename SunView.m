@@ -109,7 +109,7 @@
 	////
 	
 	
-	NSMutableDictionary *attributes1 = [[NSMutableDictionary alloc] init];
+	NSMutableDictionary *attributes1 = [NSMutableDictionary dictionary];
 	[attributes1 setObject:[NSFont fontWithName:@"Helvetica" size:11] forKey:NSFontAttributeName];
 	
 	int nOffset = 44;
@@ -142,8 +142,7 @@
 	extent = [strSunriseTime sizeWithAttributes:attributes1];
 	[strSunsetTime drawAtPoint:NSMakePoint(bounds.size.width - 3 - extent.width, 2) withAttributes:attributes1];
 	
-	// draw day length
-	
+	// draw day length	
 	strText = @"Day length";
 	
 	extent = [strText sizeWithAttributes:attributes1];
@@ -151,14 +150,6 @@
 	
 	extent = [strDayLength sizeWithAttributes:attributes1];
 	[strDayLength drawAtPoint:NSMakePoint(bounds.size.width - extent.width - 4, bounds.size.height - (extent.height * 2)) withAttributes:attributes1];
-	
-	[attributes1 release];
-	
-/*	[[NSColor blackColor] set];
-	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
-	[NSBezierPath setDefaultLineWidth:1.0];
-	[NSBezierPath strokeRect:rect1];
-	[[NSGraphicsContext currentContext] setShouldAntialias:YES];*/
 }
 
 - (bool)IsOpaque
