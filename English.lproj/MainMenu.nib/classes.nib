@@ -1,29 +1,94 @@
-{
-    IBClasses = (
-        {
-            ACTIONS = {openPreferencesWindow = id; }; 
-            CLASS = AppController; 
-            LANGUAGE = ObjC; 
-            SUPERCLASS = NSObject; 
-        }, 
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = GraphView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
-        {
-            ACTIONS = {Calculate = id; UpdateDuration = id; UpdateLocation = id; }; 
-            CLASS = MySun; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {
-                AngleView = SunView; 
-                Date1 = id; 
-                Duration1 = id; 
-                GraphView1 = GraphView; 
-                Location = id; 
-                TargetTime = id; 
-            }; 
-            SUPERCLASS = NSObject; 
-        }, 
-        {CLASS = NSDatePicker; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
-        {CLASS = SunView; LANGUAGE = ObjC; SUPERCLASS = NSView; }
-    ); 
-    IBVersion = 1; 
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IBClasses</key>
+	<array>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>Calculate</key>
+				<string>id</string>
+				<key>ToggleDrawer</key>
+				<string>id</string>
+				<key>UpdateDuration</key>
+				<string>id</string>
+				<key>UpdateLocation</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>MySun</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>AngleView</key>
+				<string>SunView</string>
+				<key>Date1</key>
+				<string>id</string>
+				<key>Duration1</key>
+				<string>id</string>
+				<key>GraphView1</key>
+				<string>GraphView</string>
+				<key>Location</key>
+				<string>id</string>
+				<key>Table</key>
+				<string>NSTableView</string>
+				<key>TargetTime</key>
+				<string>id</string>
+				<key>drawer</key>
+				<string>NSDrawer</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>FirstResponder</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>NSDatePicker</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSControl</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>SunView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>GraphView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>openPreferencesWindow</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>AppController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+	</array>
+	<key>IBVersion</key>
+	<string>1</string>
+</dict>
+</plist>

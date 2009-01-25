@@ -27,13 +27,15 @@
 @interface MySun : NSObject
 {
     IBOutlet id Date1;
-	IBOutlet id Location;
 	IBOutlet id TargetTime;
 	IBOutlet id Duration1;
 	NSWindow *window;
 	
 	IBOutlet SunView *AngleView;
 	IBOutlet GraphView *GraphView1;
+	
+	IBOutlet NSDrawer *drawer;
+	IBOutlet NSTableView *Table;
 }
 
 - (void)awakeFromNib;
@@ -41,6 +43,8 @@
 - (IBAction)UpdateLocation:(id)sender;
 
 - (IBAction)UpdateDuration:(id)sender;
+
+- (IBAction)ToggleDrawer:(id)sender;
 
 double RadToDeg(double dAngle);
 double DegToRad(double dAngle);

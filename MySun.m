@@ -41,22 +41,39 @@
 	[TargetTime addItemWithTitle:@"System Time"];
 	[TargetTime addItemWithTitle:@"Location Time"];
 	
-	[Location setDataSource:[LocationController sharedInstance]];
+	[drawer open];
+	[Table setDelegate:self];
 	
-	int nLocs = [[[LocationController sharedInstance] allLocations] count];
+	[Table setDataSource:self];
 	
-	if (nLocs > 12)
-		nLocs = 12;
+	[Table reloadData];
 	
-	[Location setNumberOfVisibleItems:nLocs];	
-	[Location selectItemAtIndex:0];
+	[Table selectRow:0 byExtendingSelection:FALSE];
 	
 	[self Calculate:self];
 }
 
+- (id)tableView:(NSTableView *) aTableView objectValueForTableColumn:(NSTableColumn *) aTableColumn row:(int) rowIndex
+{
+	id result = @"";
+	
+	LocationValue *loc = [[[LocationController sharedInstance] allLocations] objectAtIndex:rowIndex];
+
+	NSString *strTitle = [loc getTitle];
+	strTitle = [ strTitle copy];
+		
+	result = [strTitle autorelease];
+	return result;
+}
+
+- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+{
+	return [[[LocationController sharedInstance] allLocations] count];
+}
+
 - (IBAction)Calculate:(id)sender
 {
-	int nSel = [Location indexOfSelectedItem];
+	int nSel = [Table selectedRow];
 	
 	if (nSel < 0)
 	{
@@ -131,17 +148,7 @@
 
 - (IBAction)UpdateLocation:(id)sender
 {	
-/*	int nSel = [Location indexOfSelectedItem];
-	
-	if (nSel < 0)
-	{
-		return;
-	}
-	
-	LocationValue *loc = [[[LocationController sharedInstance] allLocations] objectAtIndex:nSel];
-	
-	NSString *strTitle = [loc getTitle];
-	[Location setTitle:strTitle];*/
+
 }
 
 - (IBAction)UpdateDuration:(id)sender
@@ -149,7 +156,7 @@
 	NSDate *SelDate = [Date1 dateValue];
 	NSCalendarDate *CalDate = [SelDate dateWithCalendarFormat:0 timeZone:0];
 	
-	int nSel = [Location indexOfSelectedItem];
+	int nSel = [Table selectedRow];
 	
 	if (nSel < 0)
 	{
@@ -439,6 +446,11 @@ double DegToRad(double dAngle)
 - (double) CalcDayLength:(double) dHourAngle
 {
 	return (2 * abs(RadToDeg(dHourAngle))) / 15;
+}
+
+- (IBAction)ToggleDrawer:(id)sender
+{
+	[drawer toggle:sender];
 }
 
 @end
