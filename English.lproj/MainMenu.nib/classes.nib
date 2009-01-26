@@ -13,8 +13,6 @@
 				<string>id</string>
 				<key>UpdateDuration</key>
 				<string>id</string>
-				<key>UpdateLocation</key>
-				<string>id</string>
 			</dict>
 			<key>CLASS</key>
 			<string>MySun</string>

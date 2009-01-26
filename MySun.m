@@ -146,9 +146,9 @@
 	[self UpdateDuration:self];
 }
 
-- (IBAction)UpdateLocation:(id)sender
-{	
-
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
+{
+	[self Calculate:self];
 }
 
 - (IBAction)UpdateDuration:(id)sender
@@ -227,8 +227,7 @@
 		[GraphView1 addDaylengthValue:value3];
 	}
 	
-	[GraphView1 setNeedsDisplay:YES];
-	
+	[GraphView1 setNeedsDisplay:YES];	
 }
 
 - (NSString*) CalcSunrise:(int) nYear Month:(int) nMonth Day:(int)nDay Long:(double)dLong Lat:(double)dLat TZ:(NSString*)timezone

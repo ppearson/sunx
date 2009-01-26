@@ -40,7 +40,7 @@
 
 - (void)awakeFromNib;
 - (IBAction)Calculate:(id)sender;
-- (IBAction)UpdateLocation:(id)sender;
+- (void)tableViewSelectionDidChange:(NSNotification *)notification;
 
 - (IBAction)UpdateDuration:(id)sender;
 
