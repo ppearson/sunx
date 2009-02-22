@@ -87,8 +87,9 @@
 	[TimeZone setStringValue:@""];
 	
 	NSArray *tzItems = [NSTimeZone knownTimeZoneNames];
+	NSArray *sortedTimeZones = [tzItems sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 	
-	[TimeZone addItemsWithObjectValues:tzItems];
+	[TimeZone addItemsWithObjectValues:sortedTimeZones];
 	
 	[NSApp beginSheet:addWindow modalForWindow:prefWindow modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:NULL];
 }
