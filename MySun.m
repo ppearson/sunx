@@ -29,6 +29,8 @@
 
 @implementation MySun
 
+const double dMinutesInDay = 60.0 * 24.0;
+
 - (void)awakeFromNib
 {
 	NSDate *today = [NSDate date];
@@ -115,7 +117,6 @@
 	double dTimeGMT = [CalDateToday hourOfDay] * 60;
 	dTimeGMT += [CalDateToday minuteOfHour];
 	
-	double dMinutesInDay = 60.0 * 24.0;
 	double dNowAngle = (1.0 / (dMinutesInDay / (dTimeGMT))) * 360.0;
 	
 	[AngleView setCurrentAngle:dNowAngle];
@@ -252,7 +253,6 @@
 	int nDiffSecs = [pZone secondsFromGMT];
 	int nMinutes = nDiffSecs / 60;
 	
-	double dMinutesInDay = 60.0 * 24.0;
 	double dSunriseAngle = (1.0 / (dMinutesInDay / (dTimeGMT + nMinutes))) * 360.0;
 	
 	[AngleView setSunriseAngle:dSunriseAngle];
@@ -288,7 +288,6 @@
 	int nDiffSecs = [pZone secondsFromGMTForDate:Date];
 	int nMinutes = nDiffSecs / 60;
 	
-	double dMinutesInDay = 60.0 * 24.0;
 	double dSunriseAngle = (1.0 / (dMinutesInDay / (dTimeGMT + nMinutes))) * 360.0;
 	
 	return dSunriseAngle;
@@ -320,7 +319,6 @@
 	int nDiffSecs = [pZone secondsFromGMTForDate:Date];
 	int nMinutes = nDiffSecs / 60;
 	
-	double dMinutesInDay = 60.0 * 24.0;
 	double dSunsetAngle = (1.0 / (dMinutesInDay / (dTimeGMT + nMinutes))) * 360.0;
 	
 	return dSunsetAngle;
@@ -356,7 +354,6 @@
 	int nDiffSecs = [pZone secondsFromGMT];
 	int nMinutes = nDiffSecs / 60;
 	
-	double dMinutesInDay = 60.0 * 24.0;
 	double dSunsetAngle = (1.0 / (dMinutesInDay / (dTimeGMT + nMinutes))) * 360.0;
 	
 	[AngleView setSunsetAngle:dSunsetAngle];
