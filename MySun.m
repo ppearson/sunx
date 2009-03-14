@@ -60,7 +60,7 @@
 	LocationValue *loc = [[[LocationController sharedInstance] allLocations] objectAtIndex:rowIndex];
 
 	NSString *strTitle = [loc getTitle];
-	strTitle = [ strTitle copy];
+	strTitle = [strTitle copy];
 		
 	result = [strTitle autorelease];
 	return result;
@@ -215,8 +215,6 @@
 		
 		[GraphView1 addSunsetValue:value2];
 		
-		//
-		
 		double dDay = dSunset - dSunrise;
 		
 		double dPerc = (dDay / 360.0);
@@ -235,14 +233,14 @@
 	NSCalendarDate *newDate = [NSCalendarDate dateWithYear:nYear month:nMonth day:nDay hour:0
 									minute:0 second:0 timeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
 
-	int nJulianDay = [newDate dayOfYear];	
+	int nJulianDay = [newDate dayOfYear] + 1;
 		
 	double dGamma = [self CalcGamma:nJulianDay];
 	double dEqTime = [self CalcEqOfTime:dGamma];
 	double dSolarDec = [self CalcSolarDec:dGamma];
 
 	double dHourAngle = [self CalcHourAngle:dLat SolarDec:dSolarDec Time:true];
-	double dDelta = dLong - RadToDeg(dHourAngle);
+	double dDelta = -dLong - RadToDeg(dHourAngle);
 	double dTimeDiff = 4 * dDelta;
 	double dTimeGMT = 720 + dTimeDiff - dEqTime;
 	
@@ -250,11 +248,6 @@
 	dEqTime = [self CalcEqOfTime:dGammaSunrise];
 	dSolarDec = [self CalcSolarDec:dGammaSunrise];
 
-	dHourAngle = [self CalcHourAngle:dLat SolarDec:dSolarDec Time:true];
-	dDelta = -dLong - RadToDeg(dHourAngle);
-	dTimeDiff = 4 * dDelta;
-	dTimeGMT = 720 + dTimeDiff - dEqTime;
-	
 	NSTimeZone *pZone = [NSTimeZone timeZoneWithName:timezone];
 	int nDiffSecs = [pZone secondsFromGMT];
 	int nMinutes = nDiffSecs / 60;
@@ -276,26 +269,21 @@
 
 - (double) CalcSunriseTimeAngle:(NSCalendarDate*)Date Long:(double)dLong Lat:(double)dLat TZ:(NSString*)timezone
 {
-	int nDay = [Date dayOfYear];
+	int nDay = [Date dayOfYear] + 1;
 	
 	double dGamma = [self CalcGamma:nDay];
 	double dEqTime = [self CalcEqOfTime:dGamma];
 	double dSolarDec = [self CalcSolarDec:dGamma];
 	
 	double dHourAngle = [self CalcHourAngle:dLat SolarDec:dSolarDec Time:true];
-	double dDelta = dLong - RadToDeg(dHourAngle);
+	double dDelta = -dLong - RadToDeg(dHourAngle);
 	double dTimeDiff = 4 * dDelta;
 	double dTimeGMT = 720 + dTimeDiff - dEqTime;
 	
 	double dGammaSunrise = [self CalcGamma2:nDay Hour:(int)(dTimeGMT / 60)];
 	dEqTime = [self CalcEqOfTime:dGammaSunrise];
 	dSolarDec = [self CalcSolarDec:dGammaSunrise];
-	
-	dHourAngle = [self CalcHourAngle:dLat SolarDec:dSolarDec Time:true];
-	dDelta = -dLong - RadToDeg(dHourAngle);
-	dTimeDiff = 4 * dDelta;
-	dTimeGMT = 720 + dTimeDiff - dEqTime;
-	
+
 	NSTimeZone *pZone = [NSTimeZone timeZoneWithName:timezone];
 	int nDiffSecs = [pZone secondsFromGMTForDate:Date];
 	int nMinutes = nDiffSecs / 60;
@@ -308,7 +296,7 @@
 
 - (double) CalcSunsetTimeAngle:(NSCalendarDate*)Date Long:(double)dLong Lat:(double)dLat TZ:(NSString*)timezone
 {
-	int nDay = [Date dayOfYear];
+	int nDay = [Date dayOfYear] + 1;
 	
 	double dGamma = [self CalcGamma:nDay + 1];
 	double dEqTime = [self CalcEqOfTime:dGamma];
@@ -344,7 +332,7 @@
     month:nMonth day:nDay hour:0 minute:0 second:0 
     timeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]] autorelease];
 
-	int nJulianDay = [newDate dayOfYear];
+	int nJulianDay = [newDate dayOfYear] + 1;
 
 	double dGamma = [self CalcGamma:nJulianDay + 1];
 	double dEqTime = [self CalcEqOfTime:dGamma];

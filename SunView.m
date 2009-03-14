@@ -53,17 +53,13 @@
 	
 	NSPoint centrepoint = NSMakePoint(bounds.size.width / 2.0, bounds.size.height / 2.0);
 	
-//	centrepoint.y += 10;
-//	centrepoint.x -= 10;
-	
 	[[NSColor yellowColor] set];
-//	[NSBezierPath fillRect:rect1];
 	
 	NSBezierPath* path = [NSBezierPath bezierPath];
 	
 	[path appendBezierPathWithArcWithCenter:centrepoint radius:35.0 startAngle:dSS endAngle:dSR clockwise:NO];
 	[path lineToPoint:centrepoint];
-//	[path closePath];
+
 	[path fill];
 	[[NSColor blackColor] set];
 	[path stroke];
@@ -107,7 +103,6 @@
 	[path stroke];
 	
 	////
-	
 	
 	NSMutableDictionary *attributes1 = [NSMutableDictionary dictionary];
 	[attributes1 setObject:[NSFont fontWithName:@"Helvetica" size:11] forKey:NSFontAttributeName];
