@@ -51,15 +51,18 @@
 	double dSS = [self processAngle:SunsetAngle];
 	double dCA = [self processAngle:CurrentAngle];
 	
+	double dMainRadius = 40.0;
+	
 	NSPoint centrepoint = NSMakePoint(bounds.size.width / 2.0, bounds.size.height / 2.0);
 	
 	[[NSColor yellowColor] set];
 	
 	NSBezierPath* path = [NSBezierPath bezierPath];
+	[path moveToPoint:centrepoint];
 	
-	[path appendBezierPathWithArcWithCenter:centrepoint radius:35.0 startAngle:dSS endAngle:dSR clockwise:NO];
+	[path appendBezierPathWithArcWithCenter:centrepoint radius:dMainRadius startAngle:dSS endAngle:dSR clockwise:NO];
 	[path lineToPoint:centrepoint];
-
+	
 	[path fill];
 	[[NSColor blackColor] set];
 	[path stroke];
@@ -67,19 +70,16 @@
 	[path removeAllPoints];
 	
 	[[NSColor blueColor] set];
-	[path appendBezierPathWithArcWithCenter:centrepoint radius:35.0 startAngle:dSR endAngle:dSS clockwise:NO];
+	[path moveToPoint:centrepoint];
+	
+	[path appendBezierPathWithArcWithCenter:centrepoint radius:dMainRadius startAngle:dSR endAngle:dSS clockwise:NO];
 	[path lineToPoint:centrepoint];
+	
 	[path fill];
 	[[NSColor blackColor] set];
 	[path stroke];
 	
 	[path removeAllPoints];
-
-	[[NSColor whiteColor] set];
-	[path appendBezierPathWithArcWithCenter:centrepoint radius:25.0 startAngle:0.0 endAngle:360.0];
-	[path fill];
-	[[NSColor blackColor] set];
-	[path stroke];	
 	
 	// draw time quandrant angle lines
 	
@@ -90,40 +90,67 @@
 	{
 		[path removeAllPoints];
 		
-		[self drawAngleBar:centrepoint Path:path Angle:(90.0 * i) InnRad:20.0 OutRad:38.0];
+		[self drawAngleBar:centrepoint Path:path Angle:(90.0 * i) InnRad:(dMainRadius - 5.0) OutRad:(dMainRadius + 5.0)];
 		[path stroke];		
 	}
 	
-	// draw current time bar angle
-	
+	// draw current time bar angle	
 	[path removeAllPoints];
 	[[NSColor redColor] set];
 	
-	[self drawAngleBar:centrepoint Path:path Angle:dCA InnRad:20.0 OutRad:40.0];
+	double fRad = DegToRad(dCA);
+	double fX, fY = 0.0f;
+	
+	fY = (float)sin(fRad);
+	fX = (float)cos(fRad);	
+	
+	double dStartX = centrepoint.x + (fX * dMainRadius);
+	double dStartY = centrepoint.y + (fY * dMainRadius);
+	
+	[path moveToPoint:NSMakePoint(dStartX, dStartY)];
+	
+	double dCentreWidth = 10.0;
+	[self appendPoint:centrepoint Path:path Angle:(dCA - 90.0) Distance:(dCentreWidth / 2.0) - 2.0];
+	[self appendPoint:centrepoint Path:path Angle:(dCA + 90.0) Distance:(dCentreWidth / 2.0) - 2.0];
+	
+	[path lineToPoint:NSMakePoint(dStartX, dStartY)];
+		
+	NSRect rect3 = NSMakeRect(centrepoint.x - (dCentreWidth / 2.0), centrepoint.y - (dCentreWidth / 2.0), dCentreWidth, dCentreWidth);
+	NSBezierPath *path2 = [NSBezierPath bezierPathWithOvalInRect:rect3];
+	
+	[[NSColor whiteColor] set];	
+	[path fill];
+	
+	[[NSColor blackColor] set];
 	[path stroke];
 	
-	////
+	[[NSColor whiteColor] set];
+	[path2 fill];
 	
+	[[NSColor blackColor] set];
+	[path2 stroke];
+	
+	// draw time quadrant times 	
 	NSMutableDictionary *attributes1 = [NSMutableDictionary dictionary];
 	[attributes1 setObject:[NSFont fontWithName:@"Helvetica" size:11] forKey:NSFontAttributeName];
 	
-	int nOffset = 44;
+	double dTextOffset = dMainRadius + 12.0;
 	
 	NSString *strText = @"00";
 	NSSize extent = [strText sizeWithAttributes:attributes1];
-	[strText drawAtPoint:NSMakePoint((centrepoint.x + 1 - (extent.width / 2)), (centrepoint.y - nOffset - (extent.height / 2) + 2)) withAttributes:attributes1];
+	[strText drawAtPoint:NSMakePoint((centrepoint.x + 1 - (extent.width / 2)), (centrepoint.y - dTextOffset - (extent.height / 2) + 2)) withAttributes:attributes1];
 	
 	strText = @"06";
 	extent = [strText sizeWithAttributes:attributes1];
-	[strText drawAtPoint:NSMakePoint((centrepoint.x - nOffset - (extent.width / 2)), (centrepoint.y  - (extent.height / 2))) withAttributes:attributes1];
+	[strText drawAtPoint:NSMakePoint((centrepoint.x - dTextOffset - (extent.width / 2)), (centrepoint.y  - (extent.height / 2))) withAttributes:attributes1];
 	
 	strText = @"12";
 	extent = [strText sizeWithAttributes:attributes1];
-	[strText drawAtPoint:NSMakePoint((centrepoint.x + 1 - (extent.width / 2)), (centrepoint.y + nOffset - (extent.height / 2))) withAttributes:attributes1];
+	[strText drawAtPoint:NSMakePoint((centrepoint.x + 1 - (extent.width / 2)), (centrepoint.y + dTextOffset - (extent.height / 2))) withAttributes:attributes1];
 	
 	strText = @"18";
 	extent = [strText sizeWithAttributes:attributes1];
-	[strText drawAtPoint:NSMakePoint((centrepoint.x + nOffset - (extent.width / 2)), (centrepoint.y  - (extent.height / 2))) withAttributes:attributes1];
+	[strText drawAtPoint:NSMakePoint((centrepoint.x + dTextOffset - (extent.width / 2)), (centrepoint.y  - (extent.height / 2))) withAttributes:attributes1];
 
 	strText = @"Sunrise: ";	
 	[strText drawAtPoint:NSMakePoint(3, extent.height) withAttributes:attributes1];
@@ -234,18 +261,32 @@
 - (void)drawAngleBar:(NSPoint)centrePoint Path:(NSBezierPath*)path Angle:(double)dAngle InnRad:(double)dInnRad OutRad:(double)dOutRad
 {
 	double fRad = DegToRad(dAngle);
-	double fX, fY = 0.0f;
+	double dX, dY = 0.0;
 	
-	fY = (float)sin(fRad);
-	fX = (float)cos(fRad);	
+	dY = (double)sin(fRad);
+	dX = (double)cos(fRad);	
 	
-	double dStartX = centrePoint.x + (fX * dInnRad);
-	double dStartY = centrePoint.y + (fY * dInnRad);
-	double dEndX = centrePoint.x + (fX * dOutRad);
-	double dEndY = centrePoint.y + (fY * dOutRad);
+	double dStartX = centrePoint.x + (dX * dInnRad);
+	double dStartY = centrePoint.y + (dY * dInnRad);
+	double dEndX = centrePoint.x + (dX * dOutRad);
+	double dEndY = centrePoint.y + (dY * dOutRad);
 	
 	[path moveToPoint:NSMakePoint(dStartX, dStartY)];
 	[path lineToPoint:NSMakePoint(dEndX, dEndY)];	
+}
+
+- (void)appendPoint:(NSPoint)centrePoint Path:(NSBezierPath*)path Angle:(double)dAngle Distance:(double)dDistance
+{
+	double fRad = DegToRad(dAngle);
+	double dX, dY = 0.0;
+	
+	dY = (double)sin(fRad);
+	dX = (double)cos(fRad);	
+	
+	double dNewPointX = centrePoint.x + (dX * dDistance);
+	double dNewPointY = centrePoint.y + (dY * dDistance);
+
+	[path lineToPoint:NSMakePoint(dNewPointX, dNewPointY)];
 }
 
 @end
