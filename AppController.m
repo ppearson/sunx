@@ -137,7 +137,7 @@ static AppController *sharedInstance = nil;
 		}
 		else
 		{
-			m_GraphDays = 90;
+			m_GraphDays = 180;
 		}
 		
 		NSNumber *locationTime;
@@ -168,20 +168,28 @@ static AppController *sharedInstance = nil;
     }
 	else
 	{
+		m_GraphDays = 180;
+		m_UseLocationTime = true;
+		
 		[[LocationController sharedInstance] addLocation:@"Poole" Lat:50.78 Long:-1.85 TZ:@"Europe/London"];
-		[[LocationController sharedInstance] addLocation:@"London" Lat:51.52 Long:-0.1 TZ:@"Europe/London"];
-		[[LocationController sharedInstance] addLocation:@"Paris" Lat:48.72 Long:2.38 TZ:@"Europe/Paris"];
+		[[LocationController sharedInstance] addLocation:@"London" Lat:51.51 Long:-0.12 TZ:@"Europe/London"];
+		[[LocationController sharedInstance] addLocation:@"Paris" Lat:48.85 Long:2.36 TZ:@"Europe/Paris"];
 		[[LocationController sharedInstance] addLocation:@"Berlin" Lat:52.52 Long:13.42 TZ:@"Europe/Berlin"];
-		[[LocationController sharedInstance] addLocation:@"Madrid" Lat:40.5 Long:-3.58 TZ:@"Europe/Madrid"];
-		[[LocationController sharedInstance] addLocation:@"Rome" Lat:41.8 Long:12.23 TZ:@"Europe/Rome"];
-		[[LocationController sharedInstance] addLocation:@"Oslo" Lat:59.95 Long:10.72 TZ:@"Europe/Oslo"];
+		[[LocationController sharedInstance] addLocation:@"Madrid" Lat:40.38 Long:-3.71 TZ:@"Europe/Madrid"];
+		[[LocationController sharedInstance] addLocation:@"Lisbon" Lat:38.77 Long:-9.13 TZ:@"Europe/Lisbon"];
+		[[LocationController sharedInstance] addLocation:@"Rome" Lat:41.85 Long:12.33 TZ:@"Europe/Rome"];
+		[[LocationController sharedInstance] addLocation:@"Oslo" Lat:59.95 Long:10.74 TZ:@"Europe/Oslo"];
+		[[LocationController sharedInstance] addLocation:@"Moscow" Lat:55.78 Long:37.62 TZ:@"Europe/Moscow"];
 		[[LocationController sharedInstance] addLocation:@"New York" Lat:40.7 Long:-74.17 TZ:@"America/New_York"];
-		[[LocationController sharedInstance] addLocation:@"Los Angeles" Lat:33.93 Long:-118.4 TZ:@"America/Los_Angeles"];
+		[[LocationController sharedInstance] addLocation:@"Los Angeles" Lat:34.05 Long:-118.25 TZ:@"America/Los_Angeles"];
 		[[LocationController sharedInstance] addLocation:@"Toronto" Lat:43.67 Long:-79.6 TZ:@"America/Toronto"];
-		[[LocationController sharedInstance] addLocation:@"Sydney" Lat:-33.95 Long:151.18 TZ:@"Australia/Sydney"];
+		[[LocationController sharedInstance] addLocation:@"Sydney" Lat:-33.86 Long:151.20 TZ:@"Australia/Sydney"];
+		[[LocationController sharedInstance] addLocation:@"Auckland" Lat:-36.85 Long:174.78 TZ:@"Australia/Auckland"];
+		[[LocationController sharedInstance] addLocation:@"Tokyo" Lat:35.68 Long:139.77 TZ:@"Asia/Tokyo"];
 		[[LocationController sharedInstance] addLocation:@"Hong Kong" Lat:22.32 Long:113.92 TZ:@"Asia/Hong_Kong"];
-		[[LocationController sharedInstance] addLocation:@"Cairo" Lat:30.13 Long:31.4 TZ:@"Africa/Cairo"];
-		[[LocationController sharedInstance] addLocation:@"Nairobi" Lat:-0.27 Long:36.1 TZ:@"Africa/Nairobi"];
+		[[LocationController sharedInstance] addLocation:@"Cairo" Lat:30.06 Long:31.36 TZ:@"Africa/Cairo"];
+		[[LocationController sharedInstance] addLocation:@"Nairobi" Lat:-1.28 Long:36.81 TZ:@"Africa/Nairobi"];
+		[[LocationController sharedInstance] addLocation:@"Cape Town" Lat:-33.92 Long:18.42 TZ:@"Africa/Cape_Town"];
     }	
 }
 
