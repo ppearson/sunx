@@ -26,6 +26,9 @@
 @interface AppController : NSObject
 {
 	PrefWindowController *prefWindowController;
+	
+	int		m_GraphDays;
+	bool	m_UseLocationTime;
 }
 
 + (AppController *)sharedInstance;
@@ -33,5 +36,11 @@
 
 - (void)writePreferences;
 - (void)loadPreferences;
+
+- (int)getGraphDays;
+- (void)setGraphDays:(int)days;
+
+- (bool)getUseLocationTime;
+- (void)setUseLocationTime:(bool)localTime;
 
 @end

@@ -74,7 +74,7 @@ static AppController *sharedInstance = nil;
 
 - (void)writePreferences
 {
-	NSMutableDictionary * prefs = [NSMutableDictionary dictionary];
+	NSMutableDictionary *prefs = [NSMutableDictionary dictionary];
 	
 	NSMutableArray *tempLocs;
 	tempLocs = [NSMutableArray array];
@@ -104,6 +104,16 @@ static AppController *sharedInstance = nil;
 	}
 	
     [prefs setObject:tempLocs forKey:@"Locations"];
+	
+	NSNumber *graphDays;
+	graphDays = [NSNumber numberWithInt:m_GraphDays];
+	
+	[prefs setObject:graphDays forKey:@"GraphDays"];
+	
+	NSNumber *locationTime;
+	locationTime = [NSNumber numberWithBool:m_UseLocationTime];
+	
+	[prefs setObject:locationTime forKey:@"LocationTime"];	
     
 	if ([prefs writeToFile:[@"~/Library/Preferences/SunX.plist" stringByExpandingTildeInPath] atomically: TRUE] == NO)
 	{
@@ -119,6 +129,28 @@ static AppController *sharedInstance = nil;
 	
     if (prefs)
 	{
+		NSNumber *graphDays;
+		graphDays = [prefs objectForKey:@"GraphDays"];
+		if (graphDays)
+		{
+			m_GraphDays = [graphDays intValue];
+		}
+		else
+		{
+			m_GraphDays = 90;
+		}
+		
+		NSNumber *locationTime;
+		locationTime = [prefs objectForKey:@"LocationTime"];
+		if (locationTime)
+		{
+			m_UseLocationTime = [locationTime boolValue];
+		}
+		else
+		{
+			m_UseLocationTime = true;
+		}
+		
 		NSArray *tempLocs;
 		tempLocs = [[prefs objectForKey:@"Locations"] retain];
 		
@@ -151,6 +183,26 @@ static AppController *sharedInstance = nil;
 		[[LocationController sharedInstance] addLocation:@"Cairo" Lat:30.13 Long:31.4 TZ:@"Africa/Cairo"];
 		[[LocationController sharedInstance] addLocation:@"Nairobi" Lat:-0.27 Long:36.1 TZ:@"Africa/Nairobi"];
     }	
+}
+
+- (int)getGraphDays
+{
+	return m_GraphDays;
+}
+
+- (void)setGraphDays:(int)days
+{
+	m_GraphDays = days;
+}
+
+- (bool)getUseLocationTime;
+{
+	return m_UseLocationTime;
+}
+
+- (void)setUseLocationTime:(bool)locationTime
+{
+	m_UseLocationTime = locationTime;
 }
 
 @end

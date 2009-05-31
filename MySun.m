@@ -43,6 +43,13 @@ const double dMinutesInDay = 60.0 * 24.0;
 	[TargetTime addItemWithTitle:@"System Time"];
 	[TargetTime addItemWithTitle:@"Location Time"];
 	
+	bool bUseLocationTime = [[AppController sharedInstance] getUseLocationTime];
+	if (bUseLocationTime)
+		[TargetTime selectItemAtIndex:1];	
+	
+	int nGraphDays = [[AppController sharedInstance] getGraphDays];
+	[Duration1 setIntValue:nGraphDays];
+	
 	[drawer open];
 	[Table setDelegate:self];
 	
@@ -94,10 +101,12 @@ const double dMinutesInDay = 60.0 * 24.0;
 	if (nSelTime == 0)
 	{
 		strTimeZone = [[NSTimeZone localTimeZone] name];
+		[[AppController sharedInstance] setUseLocationTime:false];
 	}
 	else
 	{
 		strTimeZone = [loc getTimeZone];
+		[[AppController sharedInstance] setUseLocationTime:true];
 	}
 	
 	NSDate *SelDate = [Date1 dateValue];
@@ -175,13 +184,17 @@ const double dMinutesInDay = 60.0 * 24.0;
 	if (nSelTime == 0)
 	{
 		strTimeZone = [[NSTimeZone localTimeZone] name];
+		[[AppController sharedInstance] setUseLocationTime:false];
 	}
 	else
 	{
 		strTimeZone = [loc getTimeZone];
+		[[AppController sharedInstance] setUseLocationTime:true];
 	}
 	
 	int nNumDaysFuture = [Duration1 intValue];
+	
+	[[AppController sharedInstance] setGraphDays:nNumDaysFuture];
 	
 	[GraphView1 Reset:nNumDaysFuture];
 	
