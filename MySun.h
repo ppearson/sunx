@@ -23,6 +23,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SunView.h"
 #import "GraphView.h"
+#import "PrefWindowController.h"
 
 @interface MySun : NSObject
 {
@@ -36,6 +37,11 @@
 	
 	IBOutlet NSDrawer *drawer;
 	IBOutlet NSTableView *Table;
+	
+	PrefWindowController *prefController;
+	
+	int		m_GraphDays;
+	bool	m_UseLocationTime;
 }
 
 - (void)awakeFromNib;
@@ -64,5 +70,16 @@ double DegToRad(double dAngle);
 
 - (double) CalcHourAngle:(double) dLat SolarDec: (double) dSolarDec Time:(bool) bTime;
 - (double) CalcDayLength:(double) dHourAngle;
+
+- (IBAction)showPreferencesWindow:(id)sender;
+
+- (void)writePreferences;
+- (void)loadPreferences;
+
+- (int)getGraphDays;
+- (void)setGraphDays:(int)days;
+
+- (bool)getUseLocationTime;
+- (void)setUseLocationTime:(bool)localTime;
 
 @end

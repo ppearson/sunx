@@ -13,6 +13,8 @@
 				<string>id</string>
 				<key>UpdateDuration</key>
 				<string>id</string>
+				<key>showPreferencesWindow</key>
+				<string>id</string>
 			</dict>
 			<key>CLASS</key>
 			<string>MySun</string>
@@ -71,19 +73,6 @@
 			<string>ObjC</string>
 			<key>SUPERCLASS</key>
 			<string>NSView</string>
-		</dict>
-		<dict>
-			<key>ACTIONS</key>
-			<dict>
-				<key>openPreferencesWindow</key>
-				<string>id</string>
-			</dict>
-			<key>CLASS</key>
-			<string>AppController</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSObject</string>
 		</dict>
 	</array>
 	<key>IBVersion</key>
