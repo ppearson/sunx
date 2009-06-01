@@ -31,6 +31,11 @@
 	return self;
 }
 
+- (void) awakeFromNib
+{
+	[[self window] makeKeyAndOrderFront:nil];	
+}
+
 - (void)windowDidLoad
 {	
 	[Table setDataSource:self];

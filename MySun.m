@@ -474,7 +474,7 @@ double DegToRad(double dAngle)
     if (![window1 isVisible])
         [window1 center];
 	
-    [window1 makeKeyAndOrderFront:nil];
+    [window1 makeKeyAndOrderFront:self];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)application
