@@ -60,15 +60,12 @@ double DegToRad(double dAngle);
 - (double) CalcEqOfTime:(double) dGamma;
 - (double) CalcSolarDec:(double) dGamma;
 
-- (NSString*) CalcSunrise:(int) nYear Month:(int) nMonth Day:(int) nDay Long:(double)dLong Lat:(double)dLat TZ:(NSString*)timezone;
-- (NSString*) CalcSunset:(int) nYear Month:(int) nMonth Day:(int) nDay Long:(double)dLong Lat:(double)dLat TZ:(NSString*)timezone;
+- (double) CalcSun:(int) nYear Month:(int) nMonth Day:(int) nDay Long:(double)dLong Lat:(double)dLat TZ:(NSString*)timezone
+										Sunrise:(bool)bSunrise Twilight:(bool)bTwilight Text:(NSString**)strText;
 
-- (double) CalcSunriseTimeAngle:(NSCalendarDate*) Date Long:(double)dLong Lat:(double)dLat TZ:(NSString*)timezone;
-- (double) CalcSunsetTimeAngle:(NSCalendarDate*) Date Long:(double)dLong Lat:(double)dLat TZ:(NSString*)timezone;
+- (double) CalcSunTimeAngle:(NSCalendarDate*) Date Long:(double)dLong Lat:(double)dLat TZ:(NSString*)timezone Sunrise:(bool)bSunrise Twilight:(bool)bTwilight;
 
-//- (double) CalcSunriseTimeAngle:(int) nDay Long:(double)dLong Lat:(double)dLat;
-
-- (double) CalcHourAngle:(double) dLat SolarDec: (double) dSolarDec Time:(bool) bTime;
+- (double) CalcHourAngle:(double) dLat SolarDec: (double) dSolarDec Sunrise:(bool) bSunrise Twilight:(bool) bTwilight;
 - (double) CalcDayLength:(double) dHourAngle;
 
 - (IBAction)showPreferencesWindow:(id)sender;

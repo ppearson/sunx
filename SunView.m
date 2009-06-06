@@ -46,10 +46,11 @@
 	[NSBezierPath strokeRect:bounds];
 	
 	// convert angles
-	
 	double dSR = [self processAngle:SunriseAngle];
 	double dSS = [self processAngle:SunsetAngle];
 	double dCA = [self processAngle:CurrentAngle];
+	double dDA = [self processAngle:DawnAngle];
+	double dDU = [self processAngle:DuskAngle];
 	
 	double dMainRadius = 40.0;
 	
@@ -85,7 +86,35 @@
 	[[NSColor blackColor] set];
 	[path stroke];
 	
-	[path removeAllPoints];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PieShowTwilight"] == true)
+	{
+		[path removeAllPoints];
+		
+		colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"PieTwilightColour"];
+		cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+		[cColour set];
+		
+		[path moveToPoint:centrepoint];
+		
+		[path appendBezierPathWithArcWithCenter:centrepoint radius:dMainRadius startAngle:dSR endAngle:dDA clockwise:NO];
+		[path lineToPoint:centrepoint];
+		
+		[path fill];
+		[[NSColor blackColor] set];
+		[path stroke];
+		
+		[path removeAllPoints];
+		
+		[path moveToPoint:centrepoint];
+		
+		[path appendBezierPathWithArcWithCenter:centrepoint radius:dMainRadius startAngle:dDU endAngle:dSS clockwise:NO];
+		[path lineToPoint:centrepoint];
+		
+		[cColour set];
+		[path fill];
+		[[NSColor blackColor] set];
+		[path stroke];
+	}
 	
 	// draw time quandrant angle lines
 	
@@ -202,6 +231,16 @@
 	return SunsetAngle;
 }
 
+- (double)getDawnAngle
+{
+	return DawnAngle;
+}
+
+- (double)getDuskAngle
+{
+	return DuskAngle;
+}
+
 - (void)setCurrentAngle:(double)dAngle
 {
 	CurrentAngle = dAngle;
@@ -215,6 +254,16 @@
 - (void)setSunsetAngle:(double)dAngle
 {
 	SunsetAngle = dAngle;
+}
+
+- (void)setDawnAngle:(double)dAngle
+{
+	DawnAngle = dAngle;
+}
+
+- (void)setDuskAngle:(double)dAngle
+{
+	DuskAngle = dAngle;
 }
 
 - (void)setSunriseTime:(NSString*)strTime

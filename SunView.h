@@ -27,6 +27,8 @@
 	double CurrentAngle;
 	double SunriseAngle;
 	double SunsetAngle;
+	double DawnAngle;
+	double DuskAngle;
 	
 	NSString *strSunriseTime;
 	NSString *strSunsetTime;
@@ -36,10 +38,14 @@
 - (double)getCurrentAngle;
 - (double)getSunriseAngle;
 - (double)getSunsetAngle;
+- (double)getDawnAngle;
+- (double)getDuskAngle;
 
 - (void)setCurrentAngle:(double)dAngle;
 - (void)setSunriseAngle:(double)dAngle;
 - (void)setSunsetAngle:(double)dAngle;
+- (void)setDawnAngle:(double)dAngle;
+- (void)setDuskAngle:(double)dAngle;
 
 - (void)setSunriseTime:(NSString*)strTime;
 - (void)setSunsetTime:(NSString*)strTime;
