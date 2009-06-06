@@ -23,17 +23,119 @@
 #import "PrefWindowController.h"
 #import "LocationController.h"
 
+#define TOOLBAR_GENERAL     @"TOOLBAR_GENERAL"
+#define TOOLBAR_PIE			@"TOOLBAR_PIE"
+#define TOOLBAR_GRAPH		@"TOOLBAR_GRAPH"
+#define TOOLBAR_LOCATIONS   @"TOOLBAR_LOCATIONS"
+
+@interface PrefWindowController (Private)
+
+- (void) setPrefView: (id) sender;
+
+@end
+
+
 @implementation PrefWindowController
 
 - (id)init
 {
-	self = [super initWithWindowNibName:@"Preferences"];
+	if (self = [super initWithWindowNibName:@"Preferences"])
+	{
+		uDefaults = [NSUserDefaults standardUserDefaults];
+	}
 	return self;
+}
+
+- (void) dealloc
+{
+    [super dealloc];
 }
 
 - (void) awakeFromNib
 {
-	[[self window] makeKeyAndOrderFront:nil];	
+    bHasLoaded = YES;
+    
+    NSToolbar * toolbar = [[NSToolbar alloc] initWithIdentifier: @"Preferences Toolbar"];
+    [toolbar setDelegate: self];
+    [toolbar setAllowsUserCustomization: NO];
+    [toolbar setDisplayMode: NSToolbarDisplayModeIconAndLabel];
+    [toolbar setSizeMode: NSToolbarSizeModeRegular];
+    [toolbar setSelectedItemIdentifier: TOOLBAR_GENERAL];
+    [[self window] setToolbar: toolbar];
+    [toolbar release];
+    
+    [self setPrefView: nil];
+	
+	[fTwilightType removeAllItems];
+	[fTwilightType addItemWithTitle:@"Civil"];
+	[fTwilightType addItemWithTitle:@"Nautical"];
+	[fTwilightType addItemWithTitle:@"Astronomical"];
+	
+	[fTwilightType selectItemAtIndex:[uDefaults integerForKey: @"GeneralTwilightType"]];
+    
+    //set download folder
+ //   [fFolderPopUp selectItemAtIndex: [fDefaults boolForKey: @"DownloadLocationConstant"] ? DOWNLOAD_FOLDER : DOWNLOAD_TORRENT];
+    
+}
+
+- (NSToolbarItem *) toolbar: (NSToolbar *) toolbar itemForItemIdentifier: (NSString *) ident willBeInsertedIntoToolbar: (BOOL) flag
+{
+    NSToolbarItem * item = [[NSToolbarItem alloc] initWithItemIdentifier: ident];
+	
+    if ([ident isEqualToString: TOOLBAR_GENERAL])
+    {
+        [item setLabel: @"General"];
+        [item setImage: [NSImage imageNamed: @"General.png"]];
+        [item setTarget: self];
+        [item setAction: @selector(setPrefView:)];
+        [item setAutovalidates: NO];
+    }
+    else if ([ident isEqualToString: TOOLBAR_PIE])
+    {
+        [item setLabel: @"Pie"];
+        [item setImage: [NSImage imageNamed: @"Pie.png"]];
+        [item setTarget: self];
+        [item setAction: @selector(setPrefView:)];
+        [item setAutovalidates: NO];
+    }
+    else if ([ident isEqualToString: TOOLBAR_GRAPH])
+    {
+        [item setLabel: @"Graph"];
+        [item setImage: [NSImage imageNamed: @"Graph.png"]];
+        [item setTarget: self];
+        [item setAction: @selector(setPrefView:)];
+        [item setAutovalidates: NO];
+    }
+    else if ([ident isEqualToString: TOOLBAR_LOCATIONS])
+    {
+        [item setLabel: @"Locations"];
+        [item setImage: [NSImage imageNamed: @"Locations.png"]];
+        [item setTarget: self];
+        [item setAction: @selector(setPrefView:)];
+        [item setAutovalidates: NO];
+    }
+	else
+    {
+        [item release];
+        return nil;
+    }
+	
+    return [item autorelease];
+}
+
+- (NSArray *) toolbarSelectableItemIdentifiers: (NSToolbar *) toolbar
+{
+    return [self toolbarDefaultItemIdentifiers: toolbar];
+}
+
+- (NSArray *) toolbarDefaultItemIdentifiers: (NSToolbar *) toolbar
+{
+    return [self toolbarAllowedItemIdentifiers: toolbar];
+}
+
+- (NSArray *) toolbarAllowedItemIdentifiers: (NSToolbar *) toolbar
+{
+    return [NSArray arrayWithObjects: TOOLBAR_GENERAL, TOOLBAR_PIE, TOOLBAR_GRAPH, TOOLBAR_LOCATIONS, nil];
 }
 
 - (void)windowDidLoad
@@ -142,6 +244,72 @@
 		
 		[Table reloadData];
 	}
+}
+
+@end
+
+@implementation PrefWindowController (Private)
+
+- (void) setPrefView: (id) sender
+{
+    NSString * identifier;
+    if (sender)
+    {
+        identifier = [sender itemIdentifier];
+        [[NSUserDefaults standardUserDefaults] setObject: identifier forKey: @"SelectedPrefView"];
+    }
+    else
+        identifier = [[NSUserDefaults standardUserDefaults] stringForKey: @"SelectedPrefView"];
+    
+    NSView * view;
+    if ([identifier isEqualToString: TOOLBAR_PIE])
+        view = vPieView;
+    else if ([identifier isEqualToString: TOOLBAR_GRAPH])
+        view = vGraphView;
+    else if ([identifier isEqualToString: TOOLBAR_LOCATIONS])
+        view = vLocationsView;
+	else
+    {
+        identifier = TOOLBAR_GENERAL; // general view is the default selected
+        view = vGeneralView;
+    }
+    
+    [[[self window] toolbar] setSelectedItemIdentifier: identifier];
+    
+    NSWindow * window = [self window];
+    if ([window contentView] == view)
+        return;
+    
+    NSRect windowRect = [window frame];
+    float difference = ([view frame].size.height - [[window contentView] frame].size.height) * [window userSpaceScaleFactor];
+    windowRect.origin.y -= difference;
+    windowRect.size.height += difference;
+    
+    [view setHidden: YES];
+    [window setContentView: view];
+    [window setFrame: windowRect display: YES animate: YES];
+    [view setHidden: NO];
+    
+    //set title label
+    if (sender)
+        [window setTitle: [sender label]];
+    else
+    {
+        NSToolbar * toolbar = [window toolbar];
+        NSString * itemIdentifier = [toolbar selectedItemIdentifier];
+		int items = [[toolbar items] count];
+		int i = 0;
+        for (i = 0; i < items; i++)
+		{
+			NSToolbarItem * item = [[toolbar items] objectAtIndex:i];
+            if ([[item itemIdentifier] isEqualToString: itemIdentifier])
+            {
+                [window setTitle: [item label]];
+                break;
+            }
+		}
+    }
+ 
 }
 
 

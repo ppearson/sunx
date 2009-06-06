@@ -208,23 +208,47 @@
 		dXPos += dInc;
 	}
 	
-	[[NSColor blueColor] set];
-	[pathSR stroke];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowSunrise"] == YES)
+	{
+		NSData *colour;
+		colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphSunriseColour"];
+		NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+		[cColour set];
+		[pathSR stroke];
+	}
 	
-	[[NSColor redColor] set];
-	[pathSS stroke];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowSunset"] == YES)
+	{
+		NSData *colour;
+		colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphSunsetColour"];
+		NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+		[cColour set];
+		[pathSS stroke];
+	}
 	
-	[[NSColor yellowColor] set];
-	[pathDL stroke];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowDayLength"] == YES)
+	{
+		NSData *colour;
+		colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphDayLengthColour"];
+		NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+		[cColour set];
+		[pathDL stroke];
+	}
 	
-	NSBezierPath* CurrentTimeLine = [NSBezierPath bezierPath];
-	
-	double dYValue = ([self getCurrentAngle] * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5);
-	[CurrentTimeLine moveToPoint:NSMakePoint(plotArea.origin.x - 30, dYValue)];
-	[CurrentTimeLine lineToPoint:NSMakePoint((plotArea.origin.x + plotArea.size.width), dYValue)];
-	
-	[[NSColor greenColor] set];
-	[CurrentTimeLine stroke];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowCurrentTime"] == YES)
+	{
+		NSBezierPath* CurrentTimeLine = [NSBezierPath bezierPath];
+		
+		double dYValue = ([self getCurrentAngle] * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5);
+		[CurrentTimeLine moveToPoint:NSMakePoint(plotArea.origin.x - 30, dYValue)];
+		[CurrentTimeLine lineToPoint:NSMakePoint((plotArea.origin.x + plotArea.size.width), dYValue)];
+		
+		NSData *colour;
+		colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphCurrentTimeColour"];
+		NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+		[cColour set];
+		[CurrentTimeLine stroke];
+	}
 }
 
 - (void)Reset:(int)nDays;

@@ -41,6 +41,49 @@ const double dMinutesInDay = 60.0 * 24.0;
     return self;
 }
 
++ (void)initialize
+{
+	NSMutableDictionary *defaultValues = [NSMutableDictionary dictionary];
+	
+	// General
+	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:@"GeneralTwilightType"];
+	
+	//  Pie
+	NSData *colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor yellowColor]];
+	[defaultValues setObject:colourData forKey:@"PieDayColour"];
+	
+	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor blueColor]];
+	[defaultValues setObject:colourData forKey:@"PieNightColour"];
+	
+	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:@"PieShowCurrentTime"];
+	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor redColor]];
+	[defaultValues setObject:colourData forKey:@"PieCurrentTimeColour"];
+	
+	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:@"PieShowTwilight"];
+	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor orangeColor]];
+	[defaultValues setObject:colourData forKey:@"PieTwilightColour"];
+	
+	// Graph
+	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:@"GraphShowSunrise"];
+	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:@"GraphShowSunset"];
+	[defaultValues setObject:[NSNumber numberWithBool:NO] forKey:@"GraphShowDayLength"];
+	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:@"GraphShowCurrentTime"];
+	
+	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor blueColor]];
+	[defaultValues setObject:colourData forKey:@"GraphSunriseColour"];
+	
+	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor yellowColor]];
+	[defaultValues setObject:colourData forKey:@"GraphSunsetColour"];
+	
+	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor redColor]];
+	[defaultValues setObject:colourData forKey:@"GraphDayLengthColour"];
+	
+	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor greenColor]];
+	[defaultValues setObject:colourData forKey:@"GraphCurrentTimeColour"];
+	
+	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
+}
+
 - (void)awakeFromNib
 {
 	NSDate *today = [NSDate date];

@@ -55,7 +55,10 @@
 	
 	NSPoint centrepoint = NSMakePoint(bounds.size.width / 2.0, bounds.size.height / 2.0);
 	
-	[[NSColor yellowColor] set];
+	NSData *colour;
+	colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"PieDayColour"];
+	NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+	[cColour set];
 	
 	NSBezierPath* path = [NSBezierPath bezierPath];
 	[path moveToPoint:centrepoint];
@@ -69,7 +72,10 @@
 	
 	[path removeAllPoints];
 	
-	[[NSColor blueColor] set];
+	colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"PieNightColour"];
+	cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+	[cColour set];
+	
 	[path moveToPoint:centrepoint];
 	
 	[path appendBezierPathWithArcWithCenter:centrepoint radius:dMainRadius startAngle:dSR endAngle:dSS clockwise:NO];
@@ -118,13 +124,15 @@
 	NSRect rect3 = NSMakeRect(centrepoint.x - (dCentreWidth / 2.0), centrepoint.y - (dCentreWidth / 2.0), dCentreWidth, dCentreWidth);
 	NSBezierPath *path2 = [NSBezierPath bezierPathWithOvalInRect:rect3];
 	
-	[[NSColor whiteColor] set];	
+	colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"PieCurrentTimeColour"];
+	cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+	[cColour set];
 	[path fill];
 	
 	[[NSColor blackColor] set];
 	[path stroke];
 	
-	[[NSColor whiteColor] set];
+	[cColour set];
 	[path2 fill];
 	
 	[[NSColor blackColor] set];

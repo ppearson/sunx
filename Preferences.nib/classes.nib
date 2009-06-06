@@ -5,6 +5,14 @@
 	<key>IBClasses</key>
 	<array>
 		<dict>
+			<key>CLASS</key>
+			<string>PrefWindow</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSWindow</string>
+		</dict>
+		<dict>
 			<key>ACTIONS</key>
 			<dict>
 				<key>cancelAddWindow</key>
@@ -34,8 +42,46 @@
 				<string>id</string>
 				<key>addWindow</key>
 				<string>NSWindow</string>
+				<key>fCurrentTimeColourWell</key>
+				<string>NSColorWell</string>
+				<key>fCurrentTimeGColourWell</key>
+				<string>NSColorWell</string>
+				<key>fDayColourWell</key>
+				<string>NSColorWell</string>
+				<key>fDayLengthColourWell</key>
+				<string>NSColorWell</string>
+				<key>fNightColourWell</key>
+				<string>NSColorWell</string>
+				<key>fShowCurrentTimeCheck</key>
+				<string>NSButton</string>
+				<key>fShowCurrentTimeGCheck</key>
+				<string>NSButton</string>
+				<key>fShowDayLengthCheck</key>
+				<string>NSButton</string>
+				<key>fShowSunriseCheck</key>
+				<string>NSButton</string>
+				<key>fShowSunsetCheck</key>
+				<string>NSButton</string>
+				<key>fShowTwilightCheck</key>
+				<string>NSButton</string>
+				<key>fSunriseColourWell</key>
+				<string>NSColorWell</string>
+				<key>fSunsetColourWell</key>
+				<string>NSColorWell</string>
+				<key>fTwilightColourWell</key>
+				<string>NSColorWell</string>
+				<key>fTwilightType</key>
+				<string>NSPopUpButton</string>
 				<key>prefWindow</key>
 				<string>NSWindow</string>
+				<key>vGeneralView</key>
+				<string>NSView</string>
+				<key>vGraphView</key>
+				<string>NSView</string>
+				<key>vLocationsView</key>
+				<string>NSView</string>
+				<key>vPieView</key>
+				<string>NSView</string>
 			</dict>
 			<key>SUPERCLASS</key>
 			<string>NSWindowController</string>

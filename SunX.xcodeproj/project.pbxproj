@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,11 +14,15 @@
 		D00A41330A23AA450057BF5E /* SunView.m in Sources */ = {isa = PBXBuildFile; fileRef = D00A41320A23AA450057BF5E /* SunView.m */; };
 		D018F628092FEAD0008352AC /* SunX.icns in Resources */ = {isa = PBXBuildFile; fileRef = D018F627092FEAD0008352AC /* SunX.icns */; };
 		D01FCD9C0A471B1E009C221E /* GraphValue.m in Sources */ = {isa = PBXBuildFile; fileRef = D01FCD9B0A471B1E009C221E /* GraphValue.m */; };
+		D02D76AD0FD851C70042A22E /* PrefWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D02D76AC0FD851C70042A22E /* PrefWindow.m */; };
+		D02D77170FD860E90042A22E /* General.png in Resources */ = {isa = PBXBuildFile; fileRef = D02D77160FD860E90042A22E /* General.png */; };
 		D02DE3150BEDF149004DB62E /* LocationValue.m in Sources */ = {isa = PBXBuildFile; fileRef = D02DE3140BEDF149004DB62E /* LocationValue.m */; };
 		D02DE3D30BEE0FA2004DB62E /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02DE3D20BEE0FA2004DB62E /* LocationController.m */; };
-		D02E405A0BECA6EF005CE0C7 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02E40590BECA6EF005CE0C7 /* AppController.m */; };
 		D02E405F0BECA7B1005CE0C7 /* PrefWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02E405E0BECA7B1005CE0C7 /* PrefWindowController.m */; };
 		D02E40630BECA878005CE0C7 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = D02E40620BECA878005CE0C7 /* Preferences.nib */; };
+		D0791DB60FD98F6A0054E77C /* Locations.png in Resources */ = {isa = PBXBuildFile; fileRef = D0791DB50FD98F6A0054E77C /* Locations.png */; };
+		D0791DBC0FD991860054E77C /* Pie.png in Resources */ = {isa = PBXBuildFile; fileRef = D0791DBB0FD991860054E77C /* Pie.png */; };
+		D0791DC40FD994F40054E77C /* Graph.png in Resources */ = {isa = PBXBuildFile; fileRef = D0791DC30FD994F40054E77C /* Graph.png */; };
 		D099C8FE0914D3A900EDE41E /* MySun.m in Sources */ = {isa = PBXBuildFile; fileRef = D099C8FD0914D3A900EDE41E /* MySun.m */; };
 		D0CD54470B49866000F41D78 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CD54460B49866000F41D78 /* GraphView.m */; };
 /* End PBXBuildFile section */
@@ -39,15 +43,19 @@
 		D018F627092FEAD0008352AC /* SunX.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = SunX.icns; sourceTree = "<group>"; };
 		D01FCD9A0A471B1E009C221E /* GraphValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphValue.h; sourceTree = "<group>"; };
 		D01FCD9B0A471B1E009C221E /* GraphValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphValue.m; sourceTree = "<group>"; };
+		D02D76AB0FD851C70042A22E /* PrefWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefWindow.h; sourceTree = "<group>"; };
+		D02D76AC0FD851C70042A22E /* PrefWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefWindow.m; sourceTree = "<group>"; };
+		D02D77160FD860E90042A22E /* General.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = General.png; path = Images/General.png; sourceTree = "<group>"; };
 		D02DE3130BEDF149004DB62E /* LocationValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationValue.h; sourceTree = "<group>"; };
 		D02DE3140BEDF149004DB62E /* LocationValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationValue.m; sourceTree = "<group>"; };
 		D02DE3D10BEE0FA2004DB62E /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
 		D02DE3D20BEE0FA2004DB62E /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
-		D02E40580BECA6EF005CE0C7 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
-		D02E40590BECA6EF005CE0C7 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		D02E405D0BECA7B1005CE0C7 /* PrefWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefWindowController.h; sourceTree = "<group>"; };
 		D02E405E0BECA7B1005CE0C7 /* PrefWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefWindowController.m; sourceTree = "<group>"; };
 		D02E40620BECA878005CE0C7 /* Preferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = Preferences.nib; sourceTree = "<group>"; };
+		D0791DB50FD98F6A0054E77C /* Locations.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Locations.png; path = Images/Locations.png; sourceTree = "<group>"; };
+		D0791DBB0FD991860054E77C /* Pie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pie.png; path = Images/Pie.png; sourceTree = "<group>"; };
+		D0791DC30FD994F40054E77C /* Graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Graph.png; path = Images/Graph.png; sourceTree = "<group>"; };
 		D099C8FC0914D3A900EDE41E /* MySun.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MySun.h; sourceTree = "<group>"; };
 		D099C8FD0914D3A900EDE41E /* MySun.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MySun.m; sourceTree = "<group>"; };
 		D0CD54450B49866000F41D78 /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
@@ -69,8 +77,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D02E40580BECA6EF005CE0C7 /* AppController.h */,
-				D02E40590BECA6EF005CE0C7 /* AppController.m */,
+				D099C8FC0914D3A900EDE41E /* MySun.h */,
+				D099C8FD0914D3A900EDE41E /* MySun.m */,
+				D02D76AB0FD851C70042A22E /* PrefWindow.h */,
+				D02D76AC0FD851C70042A22E /* PrefWindow.m */,
 				D0CD54450B49866000F41D78 /* GraphView.h */,
 				D0CD54460B49866000F41D78 /* GraphView.m */,
 				D02E405D0BECA7B1005CE0C7 /* PrefWindowController.h */,
@@ -130,8 +140,6 @@
 			children = (
 				32CA4F630368D1EE00C91783 /* SunX_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
-				D099C8FC0914D3A900EDE41E /* MySun.h */,
-				D099C8FD0914D3A900EDE41E /* MySun.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -139,6 +147,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D0791DC30FD994F40054E77C /* Graph.png */,
+				D0791DBB0FD991860054E77C /* Pie.png */,
+				D0791DB50FD98F6A0054E77C /* Locations.png */,
+				D02D77160FD860E90042A22E /* General.png */,
 				D018F627092FEAD0008352AC /* SunX.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -184,7 +196,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = D0FC383F08FC6D1400575986 /* Build configuration list for PBXProject "SunX" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* SunX */;
 			projectDirPath = "";
@@ -204,6 +216,10 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				D018F628092FEAD0008352AC /* SunX.icns in Resources */,
 				D02E40630BECA878005CE0C7 /* Preferences.nib in Resources */,
+				D02D77170FD860E90042A22E /* General.png in Resources */,
+				D0791DB60FD98F6A0054E77C /* Locations.png in Resources */,
+				D0791DBC0FD991860054E77C /* Pie.png in Resources */,
+				D0791DC40FD994F40054E77C /* Graph.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,10 +235,10 @@
 				D00A41330A23AA450057BF5E /* SunView.m in Sources */,
 				D01FCD9C0A471B1E009C221E /* GraphValue.m in Sources */,
 				D0CD54470B49866000F41D78 /* GraphView.m in Sources */,
-				D02E405A0BECA6EF005CE0C7 /* AppController.m in Sources */,
 				D02E405F0BECA7B1005CE0C7 /* PrefWindowController.m in Sources */,
 				D02DE3150BEDF149004DB62E /* LocationValue.m in Sources */,
 				D02DE3D30BEE0FA2004DB62E /* LocationController.m in Sources */,
+				D02D76AD0FD851C70042A22E /* PrefWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +324,7 @@
 			buildSettings = {
 				ARCHS = i386;
 				GCC_MODEL_TUNING = "";
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = macosx10.4;
 			};
 			name = Debug;
 		};
@@ -319,11 +335,12 @@
 					ppc,
 					i386,
 				);
+				GCC_AUTO_VECTORIZATION = YES;
 				GCC_MODEL_TUNING = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = macosx10.4;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -335,7 +352,7 @@
 					ppc,
 					i386,
 				);
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = macosx10.4;
 			};
 			name = Default;
 		};

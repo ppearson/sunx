@@ -22,8 +22,36 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface PrefWindowController : NSWindowController {
+
+	NSUserDefaults * uDefaults;
+    BOOL bHasLoaded;
+    
+    IBOutlet NSView * vGeneralView, * vPieView, * vGraphView, * vLocationsView;
+	
+	// General
+	IBOutlet NSPopUpButton * fTwilightType;
+	
+	// Pie
+	IBOutlet NSColorWell * fDayColourWell;
+	IBOutlet NSColorWell * fNightColourWell;
+	IBOutlet NSButton * fShowCurrentTimeCheck;
+	IBOutlet NSColorWell * fCurrentTimeColourWell;
+	IBOutlet NSButton * fShowTwilightCheck;
+	IBOutlet NSColorWell * fTwilightColourWell;
+	
+	// Graph
+	IBOutlet NSButton * fShowSunriseCheck;
+	IBOutlet NSColorWell * fSunriseColourWell;
+	IBOutlet NSButton * fShowSunsetCheck;
+	IBOutlet NSColorWell * fSunsetColourWell;
+	IBOutlet NSButton * fShowDayLengthCheck;
+	IBOutlet NSColorWell * fDayLengthColourWell;
+	IBOutlet NSButton * fShowCurrentTimeGCheck;
+	IBOutlet NSColorWell * fCurrentTimeGColourWell;
+	
+	
+	// Locations
 	IBOutlet id Table;
 	IBOutlet NSWindow *addWindow;
 	IBOutlet NSWindow *prefWindow;
