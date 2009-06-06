@@ -42,6 +42,8 @@
 	
 	int		m_GraphDays;
 	bool	m_UseLocationTime;
+	
+	double	m_dTwilightZenith;
 }
 
 - (void)awakeFromNib;
@@ -78,5 +80,7 @@ double DegToRad(double dAngle);
 
 - (bool)getUseLocationTime;
 - (void)setUseLocationTime:(bool)localTime;
+
+- (void)setTwilightType;
 
 @end

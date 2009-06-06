@@ -69,7 +69,6 @@
 	[fTwilightType removeAllItems];
 	[fTwilightType addItemWithTitle:@"Civil"];
 	[fTwilightType addItemWithTitle:@"Nautical"];
-	[fTwilightType addItemWithTitle:@"Astronomical"];
 	
 	[fTwilightType selectItemAtIndex:[uDefaults integerForKey: @"GeneralTwilightType"]];
     

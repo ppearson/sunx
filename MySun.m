@@ -168,6 +168,8 @@ const double dMinutesInDay = 60.0 * 24.0;
 		[self setUseLocationTime:true];
 	}
 	
+	[self setTwilightType];
+	
 	NSDate *SelDate = [Date1 dateValue];
 	NSCalendarDate *CalDate = [SelDate dateWithCalendarFormat:0 timeZone:0];
 	
@@ -426,9 +428,9 @@ double DegToRad(double dAngle)
 	
 	if (bTwilight)
 	{
-		dZenith = 96.0;
+		dZenith = m_dTwilightZenith;
 	}
-		
+	
 	if (bSunrise)
 	{
 		return (acos(cos(DegToRad(dZenith)) / (cos(dLatRad) * cos(dSolarDec)) - tan(dLatRad) * tan(dSolarDec)));
@@ -612,5 +614,18 @@ double DegToRad(double dAngle)
 	m_UseLocationTime = locationTime;
 }
 
+- (void)setTwilightType
+{
+	switch([[NSUserDefaults standardUserDefaults] integerForKey:@"GeneralTwilightType"])
+	{
+		case 1:
+			m_dTwilightZenith = 102.0;
+			break;
+		case 0:
+		default:
+			m_dTwilightZenith = 96.0;
+			break;
+	}
+}
 
 @end
