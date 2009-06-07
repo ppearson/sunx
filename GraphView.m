@@ -57,6 +57,12 @@
 	[aDaylengthData removeAllObjects];
 	[aTags removeAllObjects];
 	
+	[aSunriseData release];
+	[aSunsetData release];
+	
+	[aDaylengthData release];
+	[aTags release];
+	
 	[super dealloc];
 }
 
