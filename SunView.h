@@ -55,4 +55,6 @@
 - (void)drawAngleBar:(NSPoint)centrePoint Path:(NSBezierPath*)path Angle:(double)dAngle InnRad:(double)dInnRad OutRad:(double)dOutRad;
 - (void)appendPoint:(NSPoint)centrePoint Path:(NSBezierPath*)path Angle:(double)dAngle Distance:(double)dDistance;
 
+- (void)handleSettingsChange:(NSNotification *)note;
+
 @end

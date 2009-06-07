@@ -32,9 +32,20 @@
     self = [super initWithFrame:frame];
     if (self)
 	{
-        // Initialization code here.
+        NSNotificationCenter *nc;
+		nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self selector:@selector(handleSettingsChange:) name:@"PieSettingsUpdate" object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+	NSNotificationCenter *nc;
+	nc = [NSNotificationCenter defaultCenter];
+	[nc removeObserver:self];
+	
+	[super dealloc];
 }
 
 - (void)drawRect:(NSRect)rect
@@ -129,43 +140,46 @@
 		[path stroke];		
 	}
 	
-	// draw current time bar angle	
-	[path removeAllPoints];
-	[[NSColor redColor] set];
-	
-	double fRad = DegToRad(dCA);
-	double fX, fY = 0.0f;
-	
-	fY = (float)sin(fRad);
-	fX = (float)cos(fRad);	
-	
-	double dStartX = centrepoint.x + (fX * dMainRadius);
-	double dStartY = centrepoint.y + (fY * dMainRadius);
-	
-	[path moveToPoint:NSMakePoint(dStartX, dStartY)];
-	
-	double dCentreWidth = 10.0;
-	[self appendPoint:centrepoint Path:path Angle:(dCA - 90.0) Distance:(dCentreWidth / 2.0) - 2.0];
-	[self appendPoint:centrepoint Path:path Angle:(dCA + 90.0) Distance:(dCentreWidth / 2.0) - 2.0];
-	
-	[path lineToPoint:NSMakePoint(dStartX, dStartY)];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PieShowCurrentTime"] == true)
+	{
+		// draw current time bar angle
+		[path removeAllPoints];
+		[[NSColor redColor] set];
 		
-	NSRect rect3 = NSMakeRect(centrepoint.x - (dCentreWidth / 2.0), centrepoint.y - (dCentreWidth / 2.0), dCentreWidth, dCentreWidth);
-	NSBezierPath *path2 = [NSBezierPath bezierPathWithOvalInRect:rect3];
-	
-	colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"PieCurrentTimeColour"];
-	cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
-	[cColour set];
-	[path fill];
-	
-	[[NSColor blackColor] set];
-	[path stroke];
-	
-	[cColour set];
-	[path2 fill];
-	
-	[[NSColor blackColor] set];
-	[path2 stroke];
+		double fRad = DegToRad(dCA);
+		double fX, fY = 0.0f;
+		
+		fY = (float)sin(fRad);
+		fX = (float)cos(fRad);
+		
+		double dStartX = centrepoint.x + (fX * dMainRadius);
+		double dStartY = centrepoint.y + (fY * dMainRadius);
+		
+		[path moveToPoint:NSMakePoint(dStartX, dStartY)];
+		
+		double dCentreWidth = 10.0;
+		[self appendPoint:centrepoint Path:path Angle:(dCA - 90.0) Distance:(dCentreWidth / 2.0) - 2.0];
+		[self appendPoint:centrepoint Path:path Angle:(dCA + 90.0) Distance:(dCentreWidth / 2.0) - 2.0];
+		
+		[path lineToPoint:NSMakePoint(dStartX, dStartY)];
+		
+		NSRect rect3 = NSMakeRect(centrepoint.x - (dCentreWidth / 2.0), centrepoint.y - (dCentreWidth / 2.0), dCentreWidth, dCentreWidth);
+		NSBezierPath *path2 = [NSBezierPath bezierPathWithOvalInRect:rect3];
+		
+		colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"PieCurrentTimeColour"];
+		cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+		[cColour set];
+		[path fill];
+		
+		[[NSColor blackColor] set];
+		[path stroke];
+		
+		[cColour set];
+		[path2 fill];
+		
+		[[NSColor blackColor] set];
+		[path2 stroke];
+	}
 	
 	// draw time quadrant times 	
 	NSMutableDictionary *attributes1 = [NSMutableDictionary dictionary];
@@ -344,6 +358,11 @@
 	double dNewPointY = centrePoint.y + (dY * dDistance);
 
 	[path lineToPoint:NSMakePoint(dNewPointX, dNewPointY)];
+}
+
+- (void)handleSettingsChange:(NSNotification *)note
+{
+	[self setNeedsDisplay:YES];
 }
 
 @end

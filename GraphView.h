@@ -57,4 +57,6 @@
 - (double)getCurrentAngle;
 - (void)setCurrentAngle:(double)dAngle;
 
+- (void)handleSettingsChange:(NSNotification *)note;
+
 @end

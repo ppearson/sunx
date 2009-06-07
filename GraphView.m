@@ -37,8 +37,27 @@
 		aTags = [[NSMutableArray alloc] init];
 		
 		nDaysToShow = 50;
+		
+		NSNotificationCenter *nc;
+		nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self selector:@selector(handleSettingsChange:) name:@"GraphSettingsUpdate" object:nil];
 	}
     return self;
+}
+
+- (void)dealloc
+{
+	NSNotificationCenter *nc;
+	nc = [NSNotificationCenter defaultCenter];
+	[nc removeObserver:self];
+	
+	[aSunriseData removeAllObjects];
+	[aSunsetData removeAllObjects];
+	
+	[aDaylengthData removeAllObjects];
+	[aTags removeAllObjects];
+	
+	[super dealloc];
 }
 
 - (void)drawRect:(NSRect)rect
@@ -335,6 +354,11 @@
 - (void)setCurrentAngle:(double)dAngle
 {
 	dCurrentAngle = dAngle;
+}
+
+- (void)handleSettingsChange:(NSNotification *)note
+{
+	[self setNeedsDisplay:YES];
 }
 
 @end

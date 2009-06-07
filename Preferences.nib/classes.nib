@@ -23,6 +23,10 @@
 				<string>id</string>
 				<key>removeLocation</key>
 				<string>id</string>
+				<key>updateGraphSettings</key>
+				<string>id</string>
+				<key>updatePieSettings</key>
+				<string>id</string>
 			</dict>
 			<key>CLASS</key>
 			<string>PrefWindowController</string>

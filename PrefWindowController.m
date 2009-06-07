@@ -245,6 +245,16 @@
 	}
 }
 
+- (void)updateGraphSettings:(id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: @"GraphSettingsUpdate" object:self];
+}
+
+- (void)updatePieSettings:(id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: @"PieSettingsUpdate" object:self];
+}
+
 @end
 
 @implementation PrefWindowController (Private)
@@ -308,7 +318,6 @@
             }
 		}
     }
- 
 }
 
 

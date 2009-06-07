@@ -67,4 +67,7 @@
 - (IBAction)removeLocation:(id)sender;
 - (void)sheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 
+- (void)updateGraphSettings:(id)sender;
+- (void)updatePieSettings:(id)sender;
+
 @end
