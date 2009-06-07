@@ -83,4 +83,6 @@ double DegToRad(double dAngle);
 
 - (void)setTwilightType;
 
+- (void)handleSettingsChange:(NSNotification *)note;
+
 @end

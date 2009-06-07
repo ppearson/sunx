@@ -37,6 +37,10 @@ const double dMinutesInDay = 60.0 * 24.0;
         [NSApp setDelegate: self];
         
         prefController = [[PrefWindowController alloc] init];
+		
+		NSNotificationCenter *nc;
+		nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self selector:@selector(handleSettingsChange:) name:@"GeneralSettingsUpdate" object:nil];
     }
     return self;
 }
@@ -118,6 +122,11 @@ const double dMinutesInDay = 60.0 * 24.0;
 - (void)dealloc
 {
 	[prefController release];
+	
+	NSNotificationCenter *nc;
+	nc = [NSNotificationCenter defaultCenter];
+	[nc removeObserver:self];
+	
 	[super dealloc];
 }
 
@@ -626,6 +635,11 @@ double DegToRad(double dAngle)
 			m_dTwilightZenith = 96.0;
 			break;
 	}
+}
+
+- (void)handleSettingsChange:(NSNotification *)note
+{
+	[self Calculate:self];
 }
 
 @end

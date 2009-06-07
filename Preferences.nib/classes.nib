@@ -23,6 +23,8 @@
 				<string>id</string>
 				<key>removeLocation</key>
 				<string>id</string>
+				<key>updateGeneralSettings</key>
+				<string>id</string>
 				<key>updateGraphSettings</key>
 				<string>id</string>
 				<key>updatePieSettings</key>

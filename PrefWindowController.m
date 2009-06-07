@@ -245,6 +245,11 @@
 	}
 }
 
+- (void)updateGeneralSettings:(id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: @"GeneralSettingsUpdate" object:self];
+}
+
 - (void)updateGraphSettings:(id)sender
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName: @"GraphSettingsUpdate" object:self];
