@@ -29,10 +29,6 @@
 	double SunsetAngle;
 	double DawnAngle;
 	double DuskAngle;
-	
-	NSString *strSunriseTime;
-	NSString *strSunsetTime;
-	NSString *strDayLength;
 }
 
 - (double)getCurrentAngle;
@@ -46,10 +42,6 @@
 - (void)setSunsetAngle:(double)dAngle;
 - (void)setDawnAngle:(double)dAngle;
 - (void)setDuskAngle:(double)dAngle;
-
-- (void)setSunriseTime:(NSString*)strTime;
-- (void)setSunsetTime:(NSString*)strTime;
-- (void)setDayLength:(NSString*)strDayLen;
 
 - (double)processAngle:(double)dAngle;
 - (void)drawAngleBar:(NSPoint)centrePoint Path:(NSBezierPath*)path Angle:(double)dAngle InnRad:(double)dInnRad OutRad:(double)dOutRad;

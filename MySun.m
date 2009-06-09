@@ -202,6 +202,11 @@ const double dMinutesInDay = 60.0 * 24.0;
 	[AngleView setDawnAngle:dDawn];
 	[AngleView setDuskAngle:dDusk];
 	
+	[dawn setStringValue:strDawn1];
+	[sunrise setStringValue:strSunrise1];
+	[sunset setStringValue:strSunset1];
+	[dusk setStringValue:strDusk1];
+	
 	// calculate current time position angle
 	NSDate *today = [NSDate date];
 	NSCalendarDate *CalDateToday = [today dateWithCalendarFormat:0 timeZone:[NSTimeZone timeZoneWithName:strTimeZone]];
@@ -227,9 +232,7 @@ const double dMinutesInDay = 60.0 * 24.0;
 	NSString *strDayLength = @"";
 	strDayLength = [NSString stringWithFormat:@"%ih %im", nHours, nMins];
 	
-	[AngleView setDayLength:strDayLength];	
-	[AngleView setSunriseTime:strSunrise1];
-	[AngleView setSunsetTime:strSunset1];
+	[dayLength setStringValue:strDayLength];
 	
 	[AngleView setNeedsDisplay:YES];
 	

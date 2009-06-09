@@ -35,6 +35,12 @@
 	IBOutlet SunView *AngleView;
 	IBOutlet GraphView *GraphView1;
 	
+	IBOutlet NSTextField *dawn;
+	IBOutlet NSTextField *sunrise;
+	IBOutlet NSTextField *sunset;
+	IBOutlet NSTextField *dusk;
+	IBOutlet NSTextField *dayLength;
+	
 	IBOutlet NSDrawer *drawer;
 	IBOutlet NSTableView *Table;
 	

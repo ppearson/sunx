@@ -36,8 +36,18 @@
 				<string>NSTableView</string>
 				<key>TargetTime</key>
 				<string>id</string>
+				<key>dawn</key>
+				<string>NSTextField</string>
+				<key>dayLength</key>
+				<string>NSTextField</string>
 				<key>drawer</key>
 				<string>NSDrawer</string>
+				<key>dusk</key>
+				<string>NSTextField</string>
+				<key>sunrise</key>
+				<string>NSTextField</string>
+				<key>sunset</key>
+				<string>NSTextField</string>
 			</dict>
 			<key>SUPERCLASS</key>
 			<string>NSObject</string>

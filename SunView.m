@@ -202,27 +202,6 @@
 	strText = @"18";
 	extent = [strText sizeWithAttributes:attributes1];
 	[strText drawAtPoint:NSMakePoint((centrepoint.x + dTextOffset - (extent.width / 2)), (centrepoint.y  - (extent.height / 2))) withAttributes:attributes1];
-
-	strText = @"Sunrise: ";	
-	[strText drawAtPoint:NSMakePoint(3, extent.height) withAttributes:attributes1];
-	
-	extent = [strSunriseTime sizeWithAttributes:attributes1];
-	[strSunriseTime drawAtPoint:NSMakePoint(bounds.size.width - 3 - extent.width, extent.height) withAttributes:attributes1];
-	
-	strText = @"Sunset: ";
-	[strText drawAtPoint:NSMakePoint(3, 2) withAttributes:attributes1];
-	
-	extent = [strSunriseTime sizeWithAttributes:attributes1];
-	[strSunsetTime drawAtPoint:NSMakePoint(bounds.size.width - 3 - extent.width, 2) withAttributes:attributes1];
-	
-	// draw day length	
-	strText = @"Day length";
-	
-	extent = [strText sizeWithAttributes:attributes1];
-	[strText drawAtPoint:NSMakePoint(bounds.size.width - extent.width - 4, bounds.size.height - extent.height) withAttributes:attributes1];
-	
-	extent = [strDayLength sizeWithAttributes:attributes1];
-	[strDayLength drawAtPoint:NSMakePoint(bounds.size.width - extent.width - 4, bounds.size.height - (extent.height * 2)) withAttributes:attributes1];
 }
 
 - (bool)IsOpaque
@@ -278,27 +257,6 @@
 - (void)setDuskAngle:(double)dAngle
 {
 	DuskAngle = dAngle;
-}
-
-- (void)setSunriseTime:(NSString*)strTime
-{
-	strTime = [strTime copy];
-	[strSunriseTime release];
-	strSunriseTime = strTime;
-}
-
-- (void)setSunsetTime:(NSString*)strTime
-{
-	strTime = [strTime copy];
-	[strSunsetTime release];
-	strSunsetTime = strTime;
-}
-
-- (void)setDayLength:(NSString*)strDayLen
-{
-	strDayLen = [strDayLen copy];
-	[strDayLength release];
-	strDayLength = strDayLen;
 }
 
 - (double)processAngle:(double)dAngle
