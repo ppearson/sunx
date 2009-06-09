@@ -152,8 +152,8 @@
 		fY = (float)sin(fRad);
 		fX = (float)cos(fRad);
 		
-		double dStartX = centrepoint.x + (fX * dMainRadius);
-		double dStartY = centrepoint.y + (fY * dMainRadius);
+		double dStartX = centrepoint.x + (fX * (dMainRadius - 3.0));
+		double dStartY = centrepoint.y + (fY * (dMainRadius - 3.0));
 		
 		[path moveToPoint:NSMakePoint(dStartX, dStartY)];
 		
