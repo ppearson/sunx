@@ -27,6 +27,8 @@
 				<string>id</string>
 				<key>updateGraphSettings</key>
 				<string>id</string>
+				<key>updateLocationsSettings</key>
+				<string>id</string>
 				<key>updatePieSettings</key>
 				<string>id</string>
 			</dict>

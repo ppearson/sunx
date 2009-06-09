@@ -71,10 +71,6 @@
 	[fTwilightType addItemWithTitle:@"Nautical"];
 	
 	[fTwilightType selectItemAtIndex:[uDefaults integerForKey: @"GeneralTwilightType"]];
-    
-    //set download folder
- //   [fFolderPopUp selectItemAtIndex: [fDefaults boolForKey: @"DownloadLocationConstant"] ? DOWNLOAD_FOLDER : DOWNLOAD_TORRENT];
-    
 }
 
 - (NSToolbarItem *) toolbar: (NSToolbar *) toolbar itemForItemIdentifier: (NSString *) ident willBeInsertedIntoToolbar: (BOOL) flag
@@ -225,6 +221,7 @@
 		[[LocationController sharedInstance] removeLocationAtIndex:row];
 		
 		[Table reloadData];
+		[self updateLocationsSettings:self];
 	}	
 }
 
@@ -242,6 +239,7 @@
 		[[LocationController sharedInstance] addLocation:title Lat:dLat Long:dLong TZ:timezone];
 		
 		[Table reloadData];
+		[self updateLocationsSettings:self];
 	}
 }
 
@@ -258,6 +256,11 @@
 - (void)updatePieSettings:(id)sender
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName: @"PieSettingsUpdate" object:self];
+}
+
+- (void)updateLocationsSettings:(id)sender
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName: @"LocationsSettingsUpdate" object:self];
 }
 
 @end

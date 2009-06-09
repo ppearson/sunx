@@ -41,6 +41,7 @@ const double dMinutesInDay = 60.0 * 24.0;
 		NSNotificationCenter *nc;
 		nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleSettingsChange:) name:@"GeneralSettingsUpdate" object:nil];
+		[nc addObserver:self selector:@selector(handleLocationsChange:) name:@"LocationsSettingsUpdate" object:nil];
     }
     return self;
 }
@@ -640,6 +641,11 @@ double DegToRad(double dAngle)
 - (void)handleSettingsChange:(NSNotification *)note
 {
 	[self Calculate:self];
+}
+
+- (void)handleLocationsChange:(NSNotification *)note
+{
+	[Table reloadData];
 }
 
 @end

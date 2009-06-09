@@ -70,5 +70,6 @@
 - (void)updateGeneralSettings:(id)sender;
 - (void)updateGraphSettings:(id)sender;
 - (void)updatePieSettings:(id)sender;
+- (void)updateLocationsSettings:(id)sender;
 
 @end
