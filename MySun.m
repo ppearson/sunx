@@ -52,6 +52,8 @@ const double dMinutesInDay = 60.0 * 24.0;
 	
 	// General
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:@"GeneralTwilightType"];
+	[defaultValues setObject:[NSNumber numberWithInt:180] forKey:@"GraphDays"];
+	[defaultValues setObject:[NSNumber numberWithInt:1] forKey:@"TimeType"];
 	
 	//  Pie
 	NSData *colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor yellowColor]];
@@ -101,12 +103,7 @@ const double dMinutesInDay = 60.0 * 24.0;
 	[TargetTime addItemWithTitle:@"System Time"];
 	[TargetTime addItemWithTitle:@"Location Time"];
 	
-	bool bUseLocationTime = [self getUseLocationTime];
-	if (bUseLocationTime)
-		[TargetTime selectItemAtIndex:1];	
-	
-	int nGraphDays = [self getGraphDays];
-	[Duration1 setIntValue:nGraphDays];
+	[TargetTime selectItemAtIndex:[[NSUserDefaults standardUserDefaults] integerForKey:@"TimeType"]];
 	
 	[drawer open];
 	[Table setDelegate:self];
@@ -518,17 +515,7 @@ double DegToRad(double dAngle)
 	}
 	
     [prefs setObject:tempLocs forKey:@"Locations"];
-	
-	NSNumber *graphDays;
-	graphDays = [NSNumber numberWithInt:m_GraphDays];
-	
-	[prefs setObject:graphDays forKey:@"GraphDays"];
-	
-	NSNumber *locationTime;
-	locationTime = [NSNumber numberWithBool:m_UseLocationTime];
-	
-	[prefs setObject:locationTime forKey:@"LocationTime"];	
-    
+
 	if ([prefs writeToFile:[@"~/Library/Preferences/SunX.plist" stringByExpandingTildeInPath] atomically: TRUE] == NO)
 	{
 		
@@ -543,28 +530,6 @@ double DegToRad(double dAngle)
 	
     if (prefs)
 	{
-		NSNumber *graphDays;
-		graphDays = [prefs objectForKey:@"GraphDays"];
-		if (graphDays)
-		{
-			m_GraphDays = [graphDays intValue];
-		}
-		else
-		{
-			m_GraphDays = 180;
-		}
-		
-		NSNumber *locationTime;
-		locationTime = [prefs objectForKey:@"LocationTime"];
-		if (locationTime)
-		{
-			m_UseLocationTime = [locationTime boolValue];
-		}
-		else
-		{
-			m_UseLocationTime = true;
-		}
-		
 		NSArray *tempLocs;
 		tempLocs = [[prefs objectForKey:@"Locations"] retain];
 		
