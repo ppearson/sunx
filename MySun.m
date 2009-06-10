@@ -97,7 +97,7 @@ const double dMinutesInDay = 60.0 * 24.0;
 	
 	[Date1 setDateValue:today];
 	
-	[self loadPreferences];
+	[self loadLocations];
 	
 	[TargetTime removeAllItems];
 	[TargetTime addItemWithTitle:@"System Time"];
@@ -167,12 +167,10 @@ const double dMinutesInDay = 60.0 * 24.0;
 	if (nSelTime == 0)
 	{
 		strTimeZone = [[NSTimeZone localTimeZone] name];
-		[self setUseLocationTime:false];
 	}
 	else
 	{
 		strTimeZone = [loc getTimeZone];
-		[self setUseLocationTime:true];
 	}
 	
 	[self setTwilightType];
@@ -264,17 +262,13 @@ const double dMinutesInDay = 60.0 * 24.0;
 	if (nSelTime == 0)
 	{
 		strTimeZone = [[NSTimeZone localTimeZone] name];
-		[self setUseLocationTime:false];
 	}
 	else
 	{
 		strTimeZone = [loc getTimeZone];
-		[self setUseLocationTime:true];
 	}
 	
 	int nNumDaysFuture = [Duration1 intValue];
-	
-	[self setGraphDays:nNumDaysFuture];
 	
 	[GraphView1 Reset:nNumDaysFuture];
 	
@@ -479,11 +473,11 @@ double DegToRad(double dAngle)
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)app
 {
-	[self writePreferences];
+	[self writeLocations];
 	return NSTerminateNow;
 }
 
-- (void)writePreferences
+- (void)writeLocations
 {
 	NSMutableDictionary *prefs = [NSMutableDictionary dictionary];
 	
@@ -522,7 +516,7 @@ double DegToRad(double dAngle)
 	}
 }
 
-- (void)loadPreferences
+- (void)loadLocations
 {
 	NSDictionary *prefs;
     
@@ -547,9 +541,6 @@ double DegToRad(double dAngle)
     }
 	else
 	{
-		m_GraphDays = 180;
-		m_UseLocationTime = true;
-		
 		[[LocationController sharedInstance] addLocation:@"Poole" Lat:50.78 Long:-1.85 TZ:@"Europe/London"];
 		[[LocationController sharedInstance] addLocation:@"London" Lat:51.51 Long:-0.12 TZ:@"Europe/London"];
 		[[LocationController sharedInstance] addLocation:@"Paris" Lat:48.85 Long:2.36 TZ:@"Europe/Paris"];
@@ -570,26 +561,6 @@ double DegToRad(double dAngle)
 		[[LocationController sharedInstance] addLocation:@"Nairobi" Lat:-1.28 Long:36.81 TZ:@"Africa/Nairobi"];
 		[[LocationController sharedInstance] addLocation:@"Cape Town" Lat:-33.92 Long:18.42 TZ:@"Africa/Cape_Town"];
     }	
-}
-
-- (int)getGraphDays
-{
-	return m_GraphDays;
-}
-
-- (void)setGraphDays:(int)days
-{
-	m_GraphDays = days;
-}
-
-- (bool)getUseLocationTime;
-{
-	return m_UseLocationTime;
-}
-
-- (void)setUseLocationTime:(bool)locationTime
-{
-	m_UseLocationTime = locationTime;
 }
 
 - (void)setTwilightType

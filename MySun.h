@@ -46,9 +46,6 @@
 	
 	PrefWindowController *prefController;
 	
-	int		m_GraphDays;
-	bool	m_UseLocationTime;
-	
 	double	m_dTwilightZenith;
 }
 
@@ -78,14 +75,8 @@ double DegToRad(double dAngle);
 
 - (IBAction)showPreferencesWindow:(id)sender;
 
-- (void)writePreferences;
-- (void)loadPreferences;
-
-- (int)getGraphDays;
-- (void)setGraphDays:(int)days;
-
-- (bool)getUseLocationTime;
-- (void)setUseLocationTime:(bool)localTime;
+- (void)writeLocations;
+- (void)loadLocations;
 
 - (void)setTwilightType;
 
