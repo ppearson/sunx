@@ -63,7 +63,7 @@
 	double dDA = [self processAngle:DawnAngle];
 	double dDU = [self processAngle:DuskAngle];
 	
-	double dMainRadius = 40.0;
+	double dMainRadius = 41.0;
 	
 	NSPoint centrepoint = NSMakePoint(bounds.size.width / 2.0, bounds.size.height / 2.0);
 	
