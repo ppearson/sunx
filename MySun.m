@@ -411,7 +411,7 @@ double DegToRad(double dAngle)
 - (double) CalcEqOfTime:(double) dGamma
 {
 	double dCalcEqOfTime = (229.18 * (0.000075 + 0.001868 * cos(dGamma) - 
-				0.032077 * sin(dGamma) - 0.014615 * cos(2 * dGamma) - 0.040849 * sin(2 * dGamma)));
+				0.032077 * sin(dGamma) - 0.014615 * cos(2.0 * dGamma) - 0.040849 * sin(2.0 * dGamma)));
 		
 	return dCalcEqOfTime;
 }
@@ -548,11 +548,14 @@ double DegToRad(double dAngle)
 		[[LocationController sharedInstance] addLocation:@"Madrid" Lat:40.38 Long:-3.71 TZ:@"Europe/Madrid"];
 		[[LocationController sharedInstance] addLocation:@"Lisbon" Lat:38.77 Long:-9.13 TZ:@"Europe/Lisbon"];
 		[[LocationController sharedInstance] addLocation:@"Rome" Lat:41.85 Long:12.33 TZ:@"Europe/Rome"];
+		[[LocationController sharedInstance] addLocation:@"Reykjavik" Lat:64.13 Long:-21.93 TZ:@"Atlantic/Reykjavik"];
 		[[LocationController sharedInstance] addLocation:@"Oslo" Lat:59.95 Long:10.74 TZ:@"Europe/Oslo"];
 		[[LocationController sharedInstance] addLocation:@"Moscow" Lat:55.78 Long:37.62 TZ:@"Europe/Moscow"];
 		[[LocationController sharedInstance] addLocation:@"New York" Lat:40.7 Long:-74.17 TZ:@"America/New_York"];
+		[[LocationController sharedInstance] addLocation:@"Denver" Lat:39.74 Long:-104.98 TZ:@"America/Denver"];
 		[[LocationController sharedInstance] addLocation:@"Los Angeles" Lat:34.05 Long:-118.25 TZ:@"America/Los_Angeles"];
 		[[LocationController sharedInstance] addLocation:@"Toronto" Lat:43.67 Long:-79.6 TZ:@"America/Toronto"];
+		[[LocationController sharedInstance] addLocation:@"Buenos Aires" Lat:-34.61 Long:-58.37 TZ:@"America/Argentina/Buenos_Aires"];
 		[[LocationController sharedInstance] addLocation:@"Sydney" Lat:-33.86 Long:151.20 TZ:@"Australia/Sydney"];
 		[[LocationController sharedInstance] addLocation:@"Auckland" Lat:-36.85 Long:174.78 TZ:@"Australia/Auckland"];
 		[[LocationController sharedInstance] addLocation:@"Tokyo" Lat:35.68 Long:139.77 TZ:@"Asia/Tokyo"];
