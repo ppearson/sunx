@@ -63,7 +63,7 @@ const double dMinutesInDay = 60.0 * 24.0;
 	[defaultValues setObject:colourData forKey:@"PieNightColour"];
 	
 	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:@"PieShowCurrentTime"];
-	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor redColor]];
+	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor whiteColor]];
 	[defaultValues setObject:colourData forKey:@"PieCurrentTimeColour"];
 	
 	[defaultValues setObject:[NSNumber numberWithBool:YES] forKey:@"PieShowTwilight"];
