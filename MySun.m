@@ -575,7 +575,7 @@ double DegToRad(double dAngle)
 		[[LocationController sharedInstance] addLocation:@"Toronto" Lat:43.67 Long:-79.6 TZ:@"America/Toronto"];
 		[[LocationController sharedInstance] addLocation:@"Buenos Aires" Lat:-34.61 Long:-58.37 TZ:@"America/Argentina/Buenos_Aires"];
 		[[LocationController sharedInstance] addLocation:@"Sydney" Lat:-33.86 Long:151.20 TZ:@"Australia/Sydney"];
-		[[LocationController sharedInstance] addLocation:@"Auckland" Lat:-36.85 Long:174.78 TZ:@"Australia/Auckland"];
+		[[LocationController sharedInstance] addLocation:@"Auckland" Lat:-36.85 Long:174.78 TZ:@"Pacific/Auckland"];
 		[[LocationController sharedInstance] addLocation:@"Tokyo" Lat:35.68 Long:139.77 TZ:@"Asia/Tokyo"];
 		[[LocationController sharedInstance] addLocation:@"Hong Kong" Lat:22.32 Long:113.92 TZ:@"Asia/Hong_Kong"];
 		[[LocationController sharedInstance] addLocation:@"Cairo" Lat:30.06 Long:31.36 TZ:@"Africa/Cairo"];
