@@ -328,27 +328,36 @@ const double dMinutesInDay = 60.0 * 24.0;
 	double dEqTime = [self CalcEqOfTime:dGamma];
 	double dSolarDec = [self CalcSolarDec:dGamma];
 	
-	double dHourAngle = [self CalcHourAngle:dLat SolarDec:dSolarDec Sunrise:bSunrise Twilight:bTwilight];
-	double dDelta = -dLong - RadToDeg(dHourAngle);
-	double dTimeDiff = 4.0 * dDelta;
-	double dTimeGMT = 720.0 + dTimeDiff - dEqTime;
-	
-	double dGammaSunrise = [self CalcGamma2:nJulianDay Hour:(int)(dTimeGMT / 60)];
-	dEqTime = [self CalcEqOfTime:dGammaSunrise];
-	dSolarDec = [self CalcSolarDec:dGammaSunrise];
-	
-	NSTimeZone *pZone = [NSTimeZone timeZoneWithName:timezone];
-	int nDiffSecs = [pZone secondsFromGMT];
-	int nMinutes = nDiffSecs / 60;
-	
-	double dSunAngle = (1.0 / (dMinutesInDay / (dTimeGMT + nMinutes))) * 360.0;
-   	
-	NSCalendarDate *SunriseTime = [newDate dateByAddingYears:0 months:0 days:0 hours:0 minutes:0 seconds:(dTimeGMT * 60)];
-	
 	NSString *DateString = @"";
+	double dSunAngle = 0.0;
 	
-	DateString = [SunriseTime descriptionWithCalendarFormat:@"%H:%M" timeZone:[NSTimeZone timeZoneWithName:timezone] locale:nil];
-	
+	double dHourAngle = [self CalcHourAngle:dLat SolarDec:dSolarDec Sunrise:bSunrise Twilight:bTwilight];
+	if (!isnan(dHourAngle))
+	{
+		double dDelta = -dLong - RadToDeg(dHourAngle);
+		double dTimeDiff = 4.0 * dDelta;
+		double dTimeGMT = 720.0 + dTimeDiff - dEqTime;
+		
+		double dGammaSunrise = [self CalcGamma2:nJulianDay Hour:(int)(dTimeGMT / 60)];
+		dEqTime = [self CalcEqOfTime:dGammaSunrise];
+		dSolarDec = [self CalcSolarDec:dGammaSunrise];
+		
+		NSTimeZone *pZone = [NSTimeZone timeZoneWithName:timezone];
+		int nDiffSecs = [pZone secondsFromGMT];
+		int nMinutes = nDiffSecs / 60;
+		
+		dSunAngle = (1.0 / (dMinutesInDay / (dTimeGMT + nMinutes))) * 360.0;
+		
+		NSCalendarDate *Time = [newDate dateByAddingYears:0 months:0 days:0 hours:0 minutes:0 seconds:(dTimeGMT * 60)];
+				
+		DateString = [Time descriptionWithCalendarFormat:@"%H:%M" timeZone:[NSTimeZone timeZoneWithName:timezone] locale:nil];
+	}
+	else
+	{
+		DateString = @"-";
+		dSunAngle = -1.0;
+	}
+		
 	*strText = DateString;
 	
 	return dSunAngle;
@@ -362,22 +371,31 @@ const double dMinutesInDay = 60.0 * 24.0;
 	double dEqTime = [self CalcEqOfTime:dGamma];
 	double dSolarDec = [self CalcSolarDec:dGamma];
 	
+	double dSunAngle = 0.0;
+	
 	double dHourAngle = [self CalcHourAngle:dLat SolarDec:dSolarDec Sunrise:bSunrise Twilight:bTwilight];
-	double dDelta = -dLong - RadToDeg(dHourAngle);
-	double dTimeDiff = 4.0 * dDelta;
-	double dTimeGMT = 720.0 + dTimeDiff - dEqTime;
-	
-	double dGammaSunrise = [self CalcGamma2:nDay Hour:(int)(dTimeGMT / 60)];
-	dEqTime = [self CalcEqOfTime:dGammaSunrise];
-	dSolarDec = [self CalcSolarDec:dGammaSunrise];
+	if (dHourAngle != NAN)
+	{
+		double dDelta = -dLong - RadToDeg(dHourAngle);
+		double dTimeDiff = 4.0 * dDelta;
+		double dTimeGMT = 720.0 + dTimeDiff - dEqTime;
+		
+		double dGammaSunrise = [self CalcGamma2:nDay Hour:(int)(dTimeGMT / 60)];
+		dEqTime = [self CalcEqOfTime:dGammaSunrise];
+		dSolarDec = [self CalcSolarDec:dGammaSunrise];
 
-	NSTimeZone *pZone = [NSTimeZone timeZoneWithName:timezone];
-	int nDiffSecs = [pZone secondsFromGMTForDate:Date];
-	int nMinutes = nDiffSecs / 60;
+		NSTimeZone *pZone = [NSTimeZone timeZoneWithName:timezone];
+		int nDiffSecs = [pZone secondsFromGMTForDate:Date];
+		int nMinutes = nDiffSecs / 60;
+		
+		dSunAngle = (1.0 / (dMinutesInDay / (dTimeGMT + nMinutes))) * 360.0;
+	}
+	else
+	{
+		dSunAngle = -1.0;
+	}
 	
-	double dSunriseAngle = (1.0 / (dMinutesInDay / (dTimeGMT + nMinutes))) * 360.0;
-	
-	return dSunriseAngle;
+	return dSunAngle;
 }
 
 double RadToDeg(double dAngle)

@@ -97,34 +97,39 @@
 	[[NSColor blackColor] set];
 	[path stroke];
 	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PieShowTwilight"] == true)
+	// find out if we have valid twilight times
+	
+	if (dDA > 0.0 && dDU > 0.0)
 	{
-		[path removeAllPoints];
-		
-		colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"PieTwilightColour"];
-		cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
-		[cColour set];
-		
-		[path moveToPoint:centrepoint];
-		
-		[path appendBezierPathWithArcWithCenter:centrepoint radius:dMainRadius startAngle:dSR endAngle:dDA clockwise:NO];
-		[path lineToPoint:centrepoint];
-		
-		[path fill];
-		[[NSColor blackColor] set];
-		[path stroke];
-		
-		[path removeAllPoints];
-		
-		[path moveToPoint:centrepoint];
-		
-		[path appendBezierPathWithArcWithCenter:centrepoint radius:dMainRadius startAngle:dDU endAngle:dSS clockwise:NO];
-		[path lineToPoint:centrepoint];
-		
-		[cColour set];
-		[path fill];
-		[[NSColor blackColor] set];
-		[path stroke];
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PieShowTwilight"] == true)
+		{
+			[path removeAllPoints];
+			
+			colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"PieTwilightColour"];
+			cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+			[cColour set];
+			
+			[path moveToPoint:centrepoint];
+			
+			[path appendBezierPathWithArcWithCenter:centrepoint radius:dMainRadius startAngle:dSR endAngle:dDA clockwise:NO];
+			[path lineToPoint:centrepoint];
+			
+			[path fill];
+			[[NSColor blackColor] set];
+			[path stroke];
+			
+			[path removeAllPoints];
+			
+			[path moveToPoint:centrepoint];
+			
+			[path appendBezierPathWithArcWithCenter:centrepoint radius:dMainRadius startAngle:dDU endAngle:dSS clockwise:NO];
+			[path lineToPoint:centrepoint];
+			
+			[cColour set];
+			[path fill];
+			[[NSColor blackColor] set];
+			[path stroke];
+		}
 	}
 	
 	// draw time quandrant angle lines
@@ -262,6 +267,9 @@
 - (double)processAngle:(double)dAngle
 {
 	double dTemp = 0.0;
+	
+	if (dAngle < 0.0)
+		return -1.0;
 	
 	if (dAngle < 90.0)
 	{

@@ -118,13 +118,13 @@
 		GraphValue *pSSVal = [self getSunsetValue:k];
 		double dSSVal = [pSSVal getYValue];
 		
-		if (dSRVal < dMinY)
+		if (dSRVal < dMinY && dSRVal >= 0.0)
 			dMinY = dSRVal;
 		
 		if (dSRVal > dMaxY)
 			dMaxY = dSRVal;
 		
-		if (dSSVal < dMinY)
+		if (dSSVal < dMinY && dSSVal >= 0.0)
 			dMinY = dSSVal;
 		
 		if (dSSVal > dMaxY)
