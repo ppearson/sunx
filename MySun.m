@@ -123,6 +123,8 @@ const double dMinutesInDay = 60.0 * 24.0;
 	nc = [NSNotificationCenter defaultCenter];
 	[nc removeObserver:self];
 	
+	[[LocationController sharedInstance] release];
+	
 	[super dealloc];
 }
 
