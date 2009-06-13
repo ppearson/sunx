@@ -79,10 +79,10 @@ const double dMinutesInDay = 60.0 * 24.0;
 	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor blueColor]];
 	[defaultValues setObject:colourData forKey:@"GraphSunriseColour"];
 	
-	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor yellowColor]];
+	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor redColor]];
 	[defaultValues setObject:colourData forKey:@"GraphSunsetColour"];
 	
-	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor redColor]];
+	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor yellowColor]];
 	[defaultValues setObject:colourData forKey:@"GraphDayLengthColour"];
 	
 	colourData = [NSKeyedArchiver archivedDataWithRootObject:[NSColor greenColor]];
