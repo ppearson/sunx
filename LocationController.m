@@ -100,24 +100,6 @@ static LocationController *sharedInstance = nil;
 	[aLocations removeObject:remove];
 }
 
-- (int)numberOfItemsInComboBox:(NSComboBox *)aComboBox
-{
-	return [aLocations count];
-}
-
-- (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(int)index
-{
-	id result = @"";
-	
-	NSString *strTitle = [[aLocations objectAtIndex:index] getTitle];
-	
-	strTitle = [strTitle copy];
-	
-	result = [strTitle autorelease];
-	
-	return result;
-}
-
 - (void)addLocation:(NSString *)title Lat:(double)dLat Long:(double)dLong TZ:(NSString *)timezone
 {
 	LocationValue *loc1 = [[LocationValue alloc] autorelease];

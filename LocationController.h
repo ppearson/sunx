@@ -36,9 +36,6 @@
 
 - (void)removeLocationAtIndex:(int)index;
 
-- (int)numberOfItemsInComboBox:(NSComboBox *)aComboBox;
-- (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(int)index;
-
 - (void)addLocation:(NSString *)title Lat:(double)dLat Long:(double)dLong TZ:(NSString *)timezone;
 
 @end
