@@ -338,7 +338,7 @@ const double dMinutesInDay = 60.0 * 24.0;
 		double dTimeDiff = 4.0 * dDelta;
 		double dTimeGMT = 720.0 + dTimeDiff - dEqTime;
 		
-		double dGammaSunrise = [self CalcGamma2:nJulianDay Hour:(int)(dTimeGMT / 60)];
+		double dGammaSunrise = [self CalcGamma2:nJulianDay Hour:(int)(dTimeGMT / 60.0)];
 		dEqTime = [self CalcEqOfTime:dGammaSunrise];
 		dSolarDec = [self CalcSolarDec:dGammaSunrise];
 		
@@ -354,8 +354,8 @@ const double dMinutesInDay = 60.0 * 24.0;
 	}
 	else
 	{
+		dSunAngle = dHourAngle;
 		DateString = @"-";
-		dSunAngle = -1.0;
 	}
 		
 	*strText = DateString;
@@ -374,13 +374,13 @@ const double dMinutesInDay = 60.0 * 24.0;
 	double dSunAngle = 0.0;
 	
 	double dHourAngle = [self CalcHourAngle:dLat SolarDec:dSolarDec Sunrise:bSunrise Twilight:bTwilight];
-	if (dHourAngle != NAN)
+	if (!isnan(dHourAngle))
 	{
 		double dDelta = -dLong - RadToDeg(dHourAngle);
 		double dTimeDiff = 4.0 * dDelta;
 		double dTimeGMT = 720.0 + dTimeDiff - dEqTime;
 		
-		double dGammaSunrise = [self CalcGamma2:nDay Hour:(int)(dTimeGMT / 60)];
+		double dGammaSunrise = [self CalcGamma2:nDay Hour:(int)(dTimeGMT / 60.0)];
 		dEqTime = [self CalcEqOfTime:dGammaSunrise];
 		dSolarDec = [self CalcSolarDec:dGammaSunrise];
 

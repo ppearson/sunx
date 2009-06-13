@@ -36,8 +36,6 @@
 		
 		aTags = [[NSMutableArray alloc] init];
 		
-		nDaysToShow = 50;
-		
 		NSNotificationCenter *nc;
 		nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleSettingsChange:) name:@"GraphSettingsUpdate" object:nil];
@@ -118,13 +116,13 @@
 		GraphValue *pSSVal = [self getSunsetValue:k];
 		double dSSVal = [pSSVal getYValue];
 		
-		if (dSRVal < dMinY && dSRVal >= 0.0)
+		if (dSRVal < dMinY && !isnan(dSRVal))
 			dMinY = dSRVal;
 		
 		if (dSRVal > dMaxY)
 			dMaxY = dSRVal;
 		
-		if (dSSVal < dMinY && dSSVal >= 0.0)
+		if (dSSVal < dMinY && !isnan(dSSVal))
 			dMinY = dSSVal;
 		
 		if (dSSVal > dMaxY)

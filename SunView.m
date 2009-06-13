@@ -99,7 +99,7 @@
 	
 	// find out if we have valid twilight times
 	
-	if (dDA > 0.0 && dDU > 0.0)
+	if (!isnan(dDA) && !isnan(dDU))
 	{
 		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PieShowTwilight"] == true)
 		{
@@ -268,8 +268,8 @@
 {
 	double dTemp = 0.0;
 	
-	if (dAngle < 0.0)
-		return -1.0;
+	if (isnan(dAngle))
+		return dAngle;
 	
 	if (dAngle < 90.0)
 	{
