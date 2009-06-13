@@ -565,6 +565,7 @@ double DegToRad(double dAngle)
 		[[LocationController sharedInstance] addLocation:@"Madrid" Lat:40.38 Long:-3.71 TZ:@"Europe/Madrid"];
 		[[LocationController sharedInstance] addLocation:@"Lisbon" Lat:38.77 Long:-9.13 TZ:@"Europe/Lisbon"];
 		[[LocationController sharedInstance] addLocation:@"Rome" Lat:41.85 Long:12.33 TZ:@"Europe/Rome"];
+		[[LocationController sharedInstance] addLocation:@"Athens" Lat:37.97 Long:23.72 TZ:@"Europe/Athens"];
 		[[LocationController sharedInstance] addLocation:@"Reykjavik" Lat:64.13 Long:-21.93 TZ:@"Atlantic/Reykjavik"];
 		[[LocationController sharedInstance] addLocation:@"Oslo" Lat:59.95 Long:10.74 TZ:@"Europe/Oslo"];
 		[[LocationController sharedInstance] addLocation:@"Moscow" Lat:55.78 Long:37.62 TZ:@"Europe/Moscow"];
