@@ -113,8 +113,6 @@ const double dMinutesInDay = 60.0 * 24.0;
 	[Table reloadData];
 	
 	[Table selectRow:0 byExtendingSelection:FALSE];
-	
-	[self Calculate:self];
 }
 
 - (void)dealloc
