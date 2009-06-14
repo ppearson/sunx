@@ -47,6 +47,7 @@
 	PrefWindowController *prefController;
 	
 	double	m_dTwilightZenith;
+	int		m_nLastSelected;
 }
 
 - (void)awakeFromNib;

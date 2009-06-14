@@ -102,17 +102,16 @@ const double dMinutesInDay = 60.0 * 24.0;
 	[TargetTime removeAllItems];
 	[TargetTime addItemWithTitle:@"System Time"];
 	[TargetTime addItemWithTitle:@"Location Time"];
-	
 	[TargetTime selectItemAtIndex:[[NSUserDefaults standardUserDefaults] integerForKey:@"TimeType"]];
 	
 	[drawer open];
-	[Table setDelegate:self];
 	
+	[Table setDelegate:self];
 	[Table setDataSource:self];
 	
 	[Table reloadData];
 	
-	[Table selectRow:0 byExtendingSelection:FALSE];
+	[Table selectRow:m_nLastSelected byExtendingSelection:FALSE];
 }
 
 - (void)dealloc
@@ -527,6 +526,20 @@ double DegToRad(double dAngle)
 	}
 	
     [prefs setObject:tempLocs forKey:@"Locations"];
+	
+	// Save currently selected location
+	int nSel = [Table selectedRow];
+	
+	if (nSel >= 0)
+	{
+		LocationValue *loc = [[[LocationController sharedInstance] allLocations] objectAtIndex:nSel];
+		
+		if (loc)
+		{
+			NSString *strCurLocation = [loc getTitle];
+			[prefs setObject:strCurLocation forKey:@"LastLocation"];
+		}
+	}
 
 	if ([prefs writeToFile:[@"~/Library/Preferences/SunX.plist" stringByExpandingTildeInPath] atomically: TRUE] == NO)
 	{
@@ -545,6 +558,9 @@ double DegToRad(double dAngle)
 		NSArray *tempLocs;
 		tempLocs = [[prefs objectForKey:@"Locations"] retain];
 		
+		m_nLastSelected = 0;
+		NSString *strLastLocation = [prefs objectForKey:@"LastLocation"];
+		
 		int i = 0;
 		for (i = 0; i < [tempLocs count]; i++)
 		{
@@ -553,6 +569,11 @@ double DegToRad(double dAngle)
 			double dLat = [[loc objectForKey:@"lat"] doubleValue];
 			double dLong = [[loc objectForKey:@"long"] doubleValue];
 			NSString *strTimeZone = [loc objectForKey:@"tz"];
+			
+			if (strLastLocation && [strTitle isEqualToString:strLastLocation])
+			{
+				m_nLastSelected = i;
+			}
 			
 			[[LocationController sharedInstance] addLocation:strTitle Lat:dLat Long:dLong TZ:strTimeZone];
 		}
