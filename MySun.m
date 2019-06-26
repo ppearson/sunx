@@ -34,7 +34,7 @@ const double dMinutesInDay = 60.0 * 24.0;
 {
     if ((self = [super init]))
     {        
-        [NSApp setDelegate: self];
+        [NSApp setDelegate: (id)self];
         
         prefController = [[PrefWindowController alloc] init];
 		
@@ -106,12 +106,12 @@ const double dMinutesInDay = 60.0 * 24.0;
 	
 	[drawer open];
 	
-	[Table setDelegate:self];
-	[Table setDataSource:self];
+	[Table setDelegate:(id)self];
+	[Table setDataSource:(id)self];
 	
 	[Table reloadData];
 	
-	[Table selectRow:m_nLastSelected byExtendingSelection:FALSE];
+    [Table selectRowIndexes:[NSIndexSet indexSetWithIndex:m_nLastSelected] byExtendingSelection:FALSE];
 }
 
 - (void)dealloc
@@ -464,7 +464,7 @@ double DegToRad(double dAngle)
 
 - (double) CalcDayLength:(double) dHourAngle
 {
-	return (2.0 * abs(RadToDeg(dHourAngle))) / 15.0;
+	return (2.0 * fabs(RadToDeg(dHourAngle))) / 15.0;
 }
 
 - (IBAction)ToggleDrawer:(id)sender
@@ -599,6 +599,7 @@ double DegToRad(double dAngle)
 		[[LocationController sharedInstance] addLocation:@"Buenos Aires" Lat:-34.61 Long:-58.37 TZ:@"America/Argentina/Buenos_Aires"];
 		[[LocationController sharedInstance] addLocation:@"Sydney" Lat:-33.86 Long:151.20 TZ:@"Australia/Sydney"];
 		[[LocationController sharedInstance] addLocation:@"Auckland" Lat:-36.85 Long:174.78 TZ:@"Pacific/Auckland"];
+        [[LocationController sharedInstance] addLocation:@"Wellington" Lat:-41.286 Long:174.776 TZ:@"Pacific/Auckland"];
 		[[LocationController sharedInstance] addLocation:@"Tokyo" Lat:35.68 Long:139.77 TZ:@"Asia/Tokyo"];
 		[[LocationController sharedInstance] addLocation:@"Hong Kong" Lat:22.32 Long:113.92 TZ:@"Asia/Hong_Kong"];
 		[[LocationController sharedInstance] addLocation:@"Cairo" Lat:30.06 Long:31.36 TZ:@"Africa/Cairo"];

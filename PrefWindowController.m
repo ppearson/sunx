@@ -56,7 +56,7 @@
     bHasLoaded = YES;
     
     NSToolbar * toolbar = [[NSToolbar alloc] initWithIdentifier: @"Preferences Toolbar"];
-    [toolbar setDelegate: self];
+    [toolbar setDelegate: (id)self];
     [toolbar setAllowsUserCustomization: NO];
     [toolbar setDisplayMode: NSToolbarDisplayModeIconAndLabel];
     [toolbar setSizeMode: NSToolbarSizeModeRegular];
@@ -135,7 +135,7 @@
 
 - (void)windowDidLoad
 {	
-	[Table setDataSource:self];
+	[Table setDataSource:(id)self];
 }
 
 - (id)tableView:(NSTableView *) aTableView objectValueForTableColumn:(NSTableColumn *) aTableColumn row:(int) rowIndex
@@ -212,17 +212,15 @@
 
 - (IBAction)removeLocation:(id)sender
 {
-	NSEnumerator *enumerator = [Table selectedRowEnumerator];
-	NSNumber *temp;
-	if ((temp = [enumerator nextObject]) && temp != nil)
-	{
-		int row = [temp intValue];
-		
-		[[LocationController sharedInstance] removeLocationAtIndex:row];
-		
-		[Table reloadData];
-		[self updateLocationsSettings:self];
-	}	
+    int row = [Table selectedRow];
+    
+    if (row != -1)
+    {
+        [[LocationController sharedInstance] removeLocationAtIndex:row];
+        
+        [Table reloadData];
+        [self updateLocationsSettings:self];
+    }
 }
 
 - (void)sheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
@@ -298,7 +296,7 @@
         return;
     
     NSRect windowRect = [window frame];
-    float difference = ([view frame].size.height - [[window contentView] frame].size.height) * [window userSpaceScaleFactor];
+    float difference = ([view frame].size.height - [[window contentView] frame].size.height) * [window backingScaleFactor];
     windowRect.origin.y -= difference;
     windowRect.size.height += difference;
     
