@@ -215,7 +215,6 @@ const double dMinutesInDay = 60.0 * 24.0;
 	
 	// calculate day length
 	double dDay = dSunset - dSunrise;
-	
 	double dPerc = (dDay / 360.0);
 	
 	int nMinutesOfDaylight = dMinutesInDay * dPerc;
@@ -244,7 +243,6 @@ const double dMinutesInDay = 60.0 * 24.0;
 	NSCalendarDate *CalDate = [SelDate dateWithCalendarFormat:0 timeZone:0];
 	
 	int nSel = [Table selectedRow];
-	
 	if (nSel < 0)
 	{
 		return;
@@ -270,46 +268,36 @@ const double dMinutesInDay = 60.0 * 24.0;
 	int nNumDaysFuture = [Duration1 intValue];
 	
 	[GraphView1 Reset:nNumDaysFuture];
-	
+    
 	NSCalendarDate *nextDate = CalDate;
 	
 	int i = 0;
-	
 	for (i = 0; i < nNumDaysFuture; i++)
 	{		
 		nextDate = [CalDate dateByAddingYears:0 months:0 days:i hours:0 minutes:0 seconds:0];
 		
+		double dDawn = [self CalcSunTimeAngle:nextDate Long:dLong Lat:dLat TZ:strTimeZone Sunrise:true Twilight:true];
 		double dSunrise = [self CalcSunTimeAngle:nextDate Long:dLong Lat:dLat TZ:strTimeZone Sunrise:true Twilight:false];
 		double dSunset = [self CalcSunTimeAngle:nextDate Long:dLong Lat:dLat TZ:strTimeZone Sunrise:false Twilight:false];
+		double dDusk = [self CalcSunTimeAngle:nextDate Long:dLong Lat:dLat TZ:strTimeZone Sunrise:false Twilight:true];
 		
-		GraphValue *value1 = [[GraphValue alloc] autorelease];
-		[value1 setYValue:dSunrise];
-		
-		int nTag = -1;
-		// find out if first day of month
+		int tagIndex = -1;
+		// work out if first day of month
 		if ([nextDate dayOfMonth] == 1)
 		{
 			NSString *strMonthName = [nextDate descriptionWithCalendarFormat:@"%b" timeZone:[NSTimeZone localTimeZone] locale:nil];
-			nTag = [GraphView1 addTag:strMonthName];
+			tagIndex = [GraphView1 addTag:strMonthName];
 		}
 		
-		[value1 setXTag:nTag];
-		
-		[GraphView1 addSunriseValue:value1];
-		
-		GraphValue *value2 = [[GraphValue alloc] autorelease];
-		[value2 setYValue:dSunset];
-		
-		[GraphView1 addSunsetValue:value2];
-		
+		GraphValue* newValue = [[GraphValue alloc] autorelease];
+		[newValue setXTag:tagIndex];
+				
 		double dDay = dSunset - dSunrise;
-		
 		double dPerc = (dDay / 360.0);
 		
-		GraphValue *value3 = [[GraphValue alloc] autorelease];
-		[value3 setYValue:dPerc];
+		[newValue setValues:dDawn sunrise:dSunrise sunset:dSunset dusk:dDusk dayLength:dPerc];
 		
-		[GraphView1 addDaylengthValue:value3];
+		[GraphView1 addGraphValue:newValue];
 	}
 	
 	[GraphView1 setNeedsDisplay:YES];

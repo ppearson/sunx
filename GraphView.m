@@ -30,9 +30,7 @@
     self = [super initWithFrame:frame];
     if (self)
 	{
-        aSunriseData = [[NSMutableArray alloc] init];
-		aSunsetData = [[NSMutableArray alloc] init];
-		aDaylengthData = [[NSMutableArray alloc] init];
+		aGraphValues = [[NSMutableArray alloc] init];
 		
 		aTags = [[NSMutableArray alloc] init];
 		
@@ -40,7 +38,7 @@
 		nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleSettingsChange:) name:@"GraphSettingsUpdate" object:nil];
 	}
-    return self;
+	return self;
 }
 
 - (void)dealloc
@@ -49,16 +47,10 @@
 	nc = [NSNotificationCenter defaultCenter];
 	[nc removeObserver:self];
 	
-	[aSunriseData removeAllObjects];
-	[aSunsetData removeAllObjects];
-	
-	[aDaylengthData removeAllObjects];
+	[aGraphValues removeAllObjects];
 	[aTags removeAllObjects];
 	
-	[aSunriseData release];
-	[aSunsetData release];
-	
-	[aDaylengthData release];
+	[aGraphValues release];
 	[aTags release];
 	
 	[super dealloc];
@@ -88,8 +80,7 @@
 	NSBezierPath* pathSS = [NSBezierPath bezierPath];
 	NSBezierPath* pathDL = [NSBezierPath bezierPath];
 	
-	int nNumValues = [self SunriseCount];
-	
+	int nNumValues = [self graphValuesCount];
 	if (nNumValues < 1)
 	{
 		return;
@@ -110,11 +101,9 @@
 	int k = 0;
 	for (k = 0; k < nNumValues; k++)
 	{
-		GraphValue *pSRVal = [self getSunriseValue:k];
-		double dSRVal = [pSRVal getYValue];
-		
-		GraphValue *pSSVal = [self getSunsetValue:k];
-		double dSSVal = [pSSVal getYValue];
+		GraphValue *pGraphVal = [self getGraphValue:k];
+		double dSRVal = [pGraphVal getSunriseValue];
+		double dSSVal = [pGraphVal getSunsetValue];
 		
 		if (dSRVal < dMinY && !isnan(dSRVal))
 			dMinY = dSRVal;
@@ -175,42 +164,34 @@
 	
 	//// Draw Sunrise
 	
-	GraphValue *pSRVal = [self getSunriseValue:0];
-	double dSRVal = [pSRVal getYValue];
-	
-	GraphValue *pSSVal = [self getSunsetValue:0];
-	double dSSVal = [pSSVal getYValue];
+	GraphValue *pGraphVal = [self getGraphValue:0];
+	double dSRVal = [pGraphVal getSunriseValue];
+	double dSSVal = [pGraphVal getSunsetValue];
+	double dDLVal = [pGraphVal getDayLengthValue];
 	
 	[pathSR moveToPoint:NSMakePoint(dLeftStart, ((dSRVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5))];
 	
 	[pathSS moveToPoint:NSMakePoint(dLeftStart, ((dSSVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5))];
-	
-	GraphValue *pDLVal = [self getDaylengthValue:0];
-	double dDLVal = [pDLVal getYValue];
 	
 	[pathDL moveToPoint:NSMakePoint(dLeftStart, ((dDLVal * plotArea.size.height)) + (dMarginY * 1.5))];
 	
 	int i = 0;
 	for (i = 0; i < nNumValues; i++)
 	{
-		pSRVal = [self getSunriseValue:i];
-		dSRVal = [pSRVal getYValue];
-		
-		pSSVal = [self getSunsetValue:i];
-		dSSVal = [pSSVal getYValue];
+		pGraphVal = [self getGraphValue:i];
+		dSRVal = [pGraphVal getSunriseValue];
+		dSSVal = [pGraphVal getSunsetValue];
+		dDLVal = [pGraphVal getDayLengthValue];
 		
 		[pathSR lineToPoint:NSMakePoint(dXPos, (dSRVal * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5))];
 		
 		[pathSS lineToPoint:NSMakePoint(dXPos, (dSSVal * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5))];
 		
-		pDLVal = [self getDaylengthValue:i];
-		dDLVal = [pDLVal getYValue];
-		
 		[pathDL lineToPoint:NSMakePoint(dXPos, (dDLVal * plotArea.size.height) + (dMarginY * 1.5))];
 		
 		// draw X grid value if ness
 		
-		int nTag = [pSRVal getXTag];
+		int nTag = [pGraphVal getXTag];
 		if (nTag != -1)
 		{
 			NSBezierPath* XLine = [NSBezierPath bezierPath];
@@ -276,64 +257,26 @@
 
 - (void)Reset:(int)nDays;
 {
-	[aSunriseData removeAllObjects];
-	[aSunsetData removeAllObjects];
-	
-	[aDaylengthData removeAllObjects];
+	[aGraphValues removeAllObjects];
 	[aTags removeAllObjects];
 	
 	nDaysToShow = nDays;
 }
 
-- (void)addSunriseValue:(GraphValue*)v;
+- (void)addGraphValue:(GraphValue*)v;
 {
-	[aSunriseData addObject:v];
+	[aGraphValues addObject:v];
 }
 
-- (GraphValue*)getSunriseValue:(int)i
+- (GraphValue*)getGraphValue:(int)i
 {
-	GraphValue *pVal = [aSunriseData objectAtIndex:i];
-		
+	GraphValue *pVal = [aGraphValues objectAtIndex:i];
 	return pVal;
 }
 
-- (int)SunriseCount
+- (int)graphValuesCount
 {
-	return [aSunriseData count];
-}
-
-- (void)addSunsetValue:(GraphValue*)v;
-{
-	[aSunsetData addObject:v];
-}
-
-- (GraphValue*)getSunsetValue:(int)i
-{
-	GraphValue *pVal = [aSunsetData objectAtIndex:i];
-	
-	return pVal;
-}
-
-- (int)SunsetCount
-{
-	return [aSunsetData count];
-}
-
-- (void)addDaylengthValue:(GraphValue*)v;
-{
-	[aDaylengthData addObject:v];
-}
-
-- (GraphValue*)getDaylengthValue:(int)i
-{
-	GraphValue *pVal = [aDaylengthData objectAtIndex:i];
-	
-	return pVal;
-}
-
-- (int)DaylengthCount
-{
-	return [aDaylengthData count];
+	return [aGraphValues count];
 }
 
 - (int)addTag:(NSString*)Title

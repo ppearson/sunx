@@ -29,27 +29,16 @@
 	
 	double dCurrentAngle;
 
-	NSMutableArray *aSunriseData;
-	NSMutableArray *aSunsetData;
-	
-	NSMutableArray *aDaylengthData;
+	NSMutableArray *aGraphValues;
 	
 	NSMutableArray *aTags;
 }
 
 - (void)Reset:(int)nDays;
 
-- (void)addSunriseValue:(GraphValue*)v;
-- (int)SunriseCount;
-- (GraphValue*)getSunriseValue:(int)i;
-
-- (void)addSunsetValue:(GraphValue*)v;
-- (int)SunsetCount;
-- (GraphValue*)getSunsetValue:(int)i;
-
-- (void)addDaylengthValue:(GraphValue*)v;
-- (int)DaylengthCount;
-- (GraphValue*)getDaylengthValue:(int)i;
+- (void)addGraphValue:(GraphValue*)v;
+- (int)graphValuesCount;
+- (GraphValue*)getGraphValue:(int)i;
 
 - (int)addTag:(NSString*)Title;
 - (NSString*)getTag:(int)i;

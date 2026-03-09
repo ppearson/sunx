@@ -24,14 +24,38 @@
 
 @implementation GraphValue
 
-- (double)getYValue
+- (void)setValues:(double)dDawn sunrise: (double) dSunrise sunset: (double) dSunset dusk: (double) dDusk dayLength: (double) dDaylength
 {
-	return dYValue;
+	dawn = dDawn;
+	sunrise = dSunrise;
+	sunset = dSunset;
+	dusk = dDusk;
+	dayLength = dDaylength;
 }
 
-- (void)setYValue:(double)x
+- (double)getDawnValue
 {
-	dYValue = x;
+	return dawn;
+}
+
+- (double)getSunriseValue
+{
+	return sunrise;
+}
+
+- (double)getSunsetValue
+{
+	return sunset;
+}
+
+- (double)getDuskValue
+{
+	return dusk;
+}
+
+- (double)getDayLengthValue
+{
+	return dayLength;
 }
 
 - (int)getXTag

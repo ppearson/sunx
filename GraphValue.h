@@ -22,15 +22,27 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface GraphValue : NSObject {
-	double dYValue;
-	int nXTag; // a tag linking to x axis scale items in another array - e.g. first day of month
 	NSString *strXTagTitle;
+    
+	// Y values of different variables
+	double dawn;
+	double sunrise;
+	double sunset;
+	double dusk;
+	double dayLength;
+
+	int nXTag; // a tag linking to x axis scale items in another array - e.g. first day of month
 }
 
-- (double)getYValue;
-- (void)setYValue:(double)x;
+- (void)setValues:(double)dDawn sunrise: (double) dSunrise sunset: (double) dSunset dusk: (double) dDusk dayLength: (double) dDaylength;
+
+- (double)getDawnValue;
+- (double)getSunriseValue;
+- (double)getSunsetValue;
+- (double)getDuskValue;
+- (double)getDayLengthValue;
+
 - (int)getXTag;
 - (void)setXTag:(int)x;
 
