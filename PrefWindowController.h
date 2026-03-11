@@ -41,6 +41,7 @@
 	IBOutlet NSColorWell * fTwilightColourWell;
 	
 	// Graph
+	IBOutlet NSPopUpButton* fGraphType;
 	IBOutlet NSButton * fShowSunriseCheck;
 	IBOutlet NSColorWell * fSunriseColourWell;
 	IBOutlet NSButton * fShowSunsetCheck;
@@ -67,9 +68,9 @@
 - (IBAction)removeLocation:(id)sender;
 - (void)sheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 
-- (void)updateGeneralSettings:(id)sender;
-- (void)updateGraphSettings:(id)sender;
-- (void)updatePieSettings:(id)sender;
-- (void)updateLocationsSettings:(id)sender;
+- (IBAction)updateGeneralSettings:(id)sender;
+- (IBAction)updateGraphSettings:(id)sender;
+- (IBAction)updatePieSettings:(id)sender;
+- (IBAction)updateLocationsSettings:(id)sender;
 
 @end

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -19,7 +18,8 @@
 		D02DE3150BEDF149004DB62E /* LocationValue.m in Sources */ = {isa = PBXBuildFile; fileRef = D02DE3140BEDF149004DB62E /* LocationValue.m */; };
 		D02DE3D30BEE0FA2004DB62E /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02DE3D20BEE0FA2004DB62E /* LocationController.m */; };
 		D02E405F0BECA7B1005CE0C7 /* PrefWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D02E405E0BECA7B1005CE0C7 /* PrefWindowController.m */; };
-		D02E40630BECA878005CE0C7 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = D02E40620BECA878005CE0C7 /* Preferences.nib */; };
+		D042DC5E2F5F2F9F005394AC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D042DC5C2F5F2F9F005394AC /* MainMenu.xib */; };
+		D042DC602F5F2FBF005394AC /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = D042DC5F2F5F2FBF005394AC /* Preferences.xib */; };
 		D0791DB60FD98F6A0054E77C /* Locations.png in Resources */ = {isa = PBXBuildFile; fileRef = D0791DB50FD98F6A0054E77C /* Locations.png */; };
 		D0791DBC0FD991860054E77C /* Pie.png in Resources */ = {isa = PBXBuildFile; fileRef = D0791DBB0FD991860054E77C /* Pie.png */; };
 		D0791DC40FD994F40054E77C /* Graph.png in Resources */ = {isa = PBXBuildFile; fileRef = D0791DC30FD994F40054E77C /* Graph.png */; };
@@ -49,7 +49,8 @@
 		D02DE3D20BEE0FA2004DB62E /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
 		D02E405D0BECA7B1005CE0C7 /* PrefWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefWindowController.h; sourceTree = "<group>"; };
 		D02E405E0BECA7B1005CE0C7 /* PrefWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefWindowController.m; sourceTree = "<group>"; };
-		D02E40620BECA878005CE0C7 /* Preferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = Preferences.nib; sourceTree = "<group>"; };
+		D042DC5D2F5F2F9F005394AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		D042DC5F2F5F2FBF005394AC /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
 		D0791DB50FD98F6A0054E77C /* Locations.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Locations.png; path = Images/Locations.png; sourceTree = "<group>"; };
 		D0791DBB0FD991860054E77C /* Pie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pie.png; path = Images/Pie.png; sourceTree = "<group>"; };
 		D0791DC30FD994F40054E77C /* Graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Graph.png; path = Images/Graph.png; sourceTree = "<group>"; };
@@ -58,7 +59,6 @@
 		D0CD54450B49866000F41D78 /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
 		D0CD54460B49866000F41D78 /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
 		D0D14CF622BF78DB008219B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D0D14CF822BF78E0008219B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Base; path = Base.lproj/MainMenu.nib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +124,8 @@
 		29B97314FDCFA39411CA2CEA /* SunX */ = {
 			isa = PBXGroup;
 			children = (
+				D042DC5F2F5F2FBF005394AC /* Preferences.xib */,
+				D042DC5C2F5F2F9F005394AC /* MainMenu.xib */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -152,8 +154,6 @@
 				D018F627092FEAD0008352AC /* SunX.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
-				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
-				D02E40620BECA878005CE0C7 /* Preferences.nib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -218,14 +218,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				D018F628092FEAD0008352AC /* SunX.icns in Resources */,
-				D02E40630BECA878005CE0C7 /* Preferences.nib in Resources */,
 				D02D77170FD860E90042A22E /* General.png in Resources */,
 				D0791DB60FD98F6A0054E77C /* Locations.png in Resources */,
 				D0791DBC0FD991860054E77C /* Pie.png in Resources */,
 				D0791DC40FD994F40054E77C /* Graph.png in Resources */,
+				D042DC602F5F2FBF005394AC /* Preferences.xib in Resources */,
+				D042DC5E2F5F2F9F005394AC /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,12 +259,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+		D042DC5C2F5F2F9F005394AC /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D0D14CF822BF78E0008219B5 /* Base */,
+				D042DC5D2F5F2F9F005394AC /* Base */,
 			);
-			name = MainMenu.nib;
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -284,6 +284,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.peterpearson.SunX;
 				PRODUCT_NAME = SunX;
 				WRAPPER_EXTENSION = app;
@@ -303,6 +304,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.peterpearson.SunX;
 				PRODUCT_NAME = SunX;
 				WRAPPER_EXTENSION = app;
@@ -321,6 +323,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.peterpearson.SunX;
 				PRODUCT_NAME = SunX;
 				WRAPPER_EXTENSION = app;
@@ -356,7 +359,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				USE_HEADERMAP = NO;
@@ -394,7 +397,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				SDKROOT = macosx;
 				USE_HEADERMAP = NO;
 				ZERO_LINK = NO;
@@ -428,7 +431,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				SDKROOT = macosx;
 				USE_HEADERMAP = NO;
 			};
