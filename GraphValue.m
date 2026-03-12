@@ -1,6 +1,6 @@
-/* 
- * SunX:  A Sunrise/Sunset calculator for OS X.
- * Copyright (C) 2005-2007 Peter Pearson
+/*
+ * SunX:  A Sunrise/Sunset calculator for MacOS.
+ * Copyright (C) 2005-2007, 2026 Peter Pearson
  * You can view the complete license in the Licence.txt file in the root
  * of the source tree.
  *
