@@ -64,11 +64,12 @@
 	[[NSColor blackColor] set];
 	[NSBezierPath strokeRect:bounds];
 	
-	double dMarginX = 25;
-	double dMarginY = 12;
+	double dMarginX = 25.0;
+	double dMarginY = 12.0;
 	
 	NSRect innerBounds = NSInsetRect(bounds, dMarginX, dMarginY);
-	NSRect plotArea = NSOffsetRect(innerBounds, (dMarginX/2), (dMarginY/2));
+	NSRect plotArea = NSOffsetRect(innerBounds, (dMarginX/2.0), (dMarginY/2.0));
+	dMarginY *= 1.5;
 	
 	int nNumValues = [self graphValuesCount];
 	if (nNumValues < 1)
@@ -76,7 +77,7 @@
 		return;
 	}
 	
-	int chartType = [[NSUserDefaults standardUserDefaults] integerForKey:@"GraphGraphType"];
+	int graphType = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"GraphGraphType"];
 	
 	double dLeftStart = plotArea.origin.x;
 	
@@ -98,7 +99,7 @@
 	{
 		GraphValue *pGraphVal = [self getGraphValue:k];
 		
-		if (chartType == 0)
+		if (graphType == 0)
 		{
 			double dSRVal = [pGraphVal getSunriseValue];
 			double dSSVal = [pGraphVal getSunsetValue];
@@ -109,7 +110,7 @@
 			if (dSSVal > dMaxY && !isnan(dSSVal))
 				dMaxY = dSSVal;
 		}
-		else if (chartType == 1)
+		else if (graphType == 1)
 		{
 			double dDawnVal = [pGraphVal getDawnValue];
 			double dDuskVal = [pGraphVal getDuskValue];
@@ -122,11 +123,11 @@
 		}
 	}
 	
-	if (chartType == 0)
+	if (graphType == 0)
 	{
 		[[NSColor whiteColor] set];
 	}
-	else if (chartType == 1)
+	else if (graphType == 1)
 	{
 		[[NSColor colorWithSRGBRed:0.98 green:0.98 blue:0.98 alpha:1.0] set];
 	}
@@ -144,10 +145,10 @@
 	
 	double dYScale = plotArea.size.height / dYRange;
 	
-	NSDate *today = [NSDate date];
-	NSCalendarDate *CalDate = [today dateWithCalendarFormat:0 timeZone:0];
+	NSDate* today = [NSDate date];
+	NSCalendarDate* CalDate = [today dateWithCalendarFormat:0 timeZone:0];
 	
-	///// draw Y axis grid
+	// draw Y axis grid
 	
 	int nStartHour = dMinY + 15 - ((int)dMinY % 15);
 
@@ -162,7 +163,7 @@
 		
 		NSBezierPath* YLine = [NSBezierPath bezierPath];
 		
-		double dYValue = (k * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5);
+		double dYValue = (k * dYScale) - (dMinY * dYScale) + dMarginY;
 		[YLine moveToPoint:NSMakePoint(plotArea.origin.x, dYValue)];
 		[YLine lineToPoint:NSMakePoint((plotArea.origin.x + plotArea.size.width), dYValue)];
 		
@@ -179,22 +180,21 @@
 	
 	double dXPos = dLeftStart + dInc;
 	
-	//// Draw Sunrise
+	// these are (optionally) drawn for both graph types
+	NSBezierPath* pathSR = [NSBezierPath bezierPath];
+	NSBezierPath* pathSS = [NSBezierPath bezierPath];
+	NSBezierPath* pathDL = [NSBezierPath bezierPath];
 	
-	if (chartType == 0)
+	if (graphType == 0)
 	{
 		GraphValue *pGraphVal = [self getGraphValue:0];
 		double dSRVal = [pGraphVal getSunriseValue];
 		double dSSVal = [pGraphVal getSunsetValue];
 		double dDLVal = [pGraphVal getDayLengthValue];
 		
-		NSBezierPath* pathSR = [NSBezierPath bezierPath];
-		NSBezierPath* pathSS = [NSBezierPath bezierPath];
-		NSBezierPath* pathDL = [NSBezierPath bezierPath];
-		
-		[pathSR moveToPoint:NSMakePoint(dLeftStart, ((dSRVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5))];
-		[pathSS moveToPoint:NSMakePoint(dLeftStart, ((dSSVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5))];
-		[pathDL moveToPoint:NSMakePoint(dLeftStart, ((dDLVal * plotArea.size.height)) + (dMarginY * 1.5))];
+		[pathSR moveToPoint:NSMakePoint(dLeftStart, ((dSRVal * dYScale) - (dMinY * dYScale)) + dMarginY)];
+		[pathSS moveToPoint:NSMakePoint(dLeftStart, ((dSSVal * dYScale) - (dMinY * dYScale)) + dMarginY)];
+		[pathDL moveToPoint:NSMakePoint(dLeftStart, ((dDLVal * plotArea.size.height)) + dMarginY)];
 		
 		int i = 0;
 		for (i = 0; i < nNumValues; i++)
@@ -204,11 +204,11 @@
 			dSSVal = [pGraphVal getSunsetValue];
 			dDLVal = [pGraphVal getDayLengthValue];
 			
-			[pathSR lineToPoint:NSMakePoint(dXPos, (dSRVal * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5))];
-			[pathSS lineToPoint:NSMakePoint(dXPos, (dSSVal * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5))];
-			[pathDL lineToPoint:NSMakePoint(dXPos, (dDLVal * plotArea.size.height) + (dMarginY * 1.5))];
+			[pathSR lineToPoint:NSMakePoint(dXPos, (dSRVal * dYScale) - (dMinY * dYScale) + dMarginY)];
+			[pathSS lineToPoint:NSMakePoint(dXPos, (dSSVal * dYScale) - (dMinY * dYScale) + dMarginY)];
+			[pathDL lineToPoint:NSMakePoint(dXPos, (dDLVal * plotArea.size.height) + dMarginY)];
 			
-			// draw X grid value if ness
+			// draw X grid value if needed
 			
 			int nTag = [pGraphVal getXTag];
 			if (nTag != -1)
@@ -218,7 +218,6 @@
 				[XLine lineToPoint:NSMakePoint(dXPos, (plotArea.origin.y + plotArea.size.height))];
 				
 				[[NSColor grayColor] set];
-				
 				[XLine stroke];
 				
 				NSString *strTagText = [self getTag:nTag];
@@ -226,39 +225,13 @@
 				NSMutableDictionary *attributes1 = [NSMutableDictionary dictionary];
 				[attributes1 setObject:[NSFont fontWithName:@"Helvetica" size:11] forKey:NSFontAttributeName];
 				
-				[strTagText drawAtPoint:NSMakePoint(dXPos, plotArea.origin.y - 15) withAttributes:attributes1];
+				double textPosX = dXPos - 10.0;
+				[strTagText drawAtPoint:NSMakePoint(textPosX, plotArea.origin.y - 15) withAttributes:attributes1];
 			}
 			dXPos += dInc;
 		}
-		
-		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowSunrise"] == YES)
-		{
-			NSData *colour;
-			colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphSunriseColour"];
-			NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
-			[cColour set];
-			[pathSR stroke];
-		}
-		
-		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowSunset"] == YES)
-		{
-			NSData *colour;
-			colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphSunsetColour"];
-			NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
-			[cColour set];
-			[pathSS stroke];
-		}
-		
-		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowDayLength"] == YES)
-		{
-			NSData *colour;
-			colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphDayLengthColour"];
-			NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
-			[cColour set];
-			[pathDL stroke];
-		}
 	}
-	else if (chartType == 1)
+	else if (graphType == 1)
 	{
 		GraphValue* pGraphVal = [self getGraphValue:0];
 		double dDawnVal = [pGraphVal getDawnValue];
@@ -272,28 +245,24 @@
 		NSBezierPath* pathDusk = [NSBezierPath bezierPath];
 		NSBezierPath* pathNight1 = [NSBezierPath bezierPath];
 		
-		NSBezierPath* pathSR = [NSBezierPath bezierPath];
-		NSBezierPath* pathSS = [NSBezierPath bezierPath];
-		NSBezierPath* pathDL = [NSBezierPath bezierPath];
-		
 		NSMutableArray* dawnPositions = [[NSMutableArray alloc] initWithCapacity:365];
 		NSMutableArray* sunrisePositions = [[NSMutableArray alloc] initWithCapacity:365];
 		NSMutableArray* sunsetPositions = [[NSMutableArray alloc] initWithCapacity:365];
 		NSMutableArray* duskPositions = [[NSMutableArray alloc] initWithCapacity:365];
 		
-		double yPosDawn = ((dDawnVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5);
-		double yPosSunrise = ((dSRVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5);
-		double yPosSunset = ((dSSVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5);
-		double yPosDusk = ((dDuskVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5);
+		double yPosDawn = ((dDawnVal * dYScale) - (dMinY * dYScale)) + dMarginY;
+		double yPosSunrise = ((dSRVal * dYScale) - (dMinY * dYScale)) + dMarginY;
+		double yPosSunset = ((dSSVal * dYScale) - (dMinY * dYScale)) + dMarginY;
+		double yPosDusk = ((dDuskVal * dYScale) - (dMinY * dYScale)) + dMarginY;
 		
 		[dawnPositions addObject:[NSValue valueWithPoint:NSMakePoint(dLeftStart, yPosDawn)]];
 		[sunrisePositions addObject:[NSValue valueWithPoint:NSMakePoint(dLeftStart, yPosSunrise)]];
 		[sunsetPositions addObject:[NSValue valueWithPoint:NSMakePoint(dLeftStart, yPosSunset)]];
 		[duskPositions addObject:[NSValue valueWithPoint:NSMakePoint(dLeftStart, yPosDusk)]];
 		
-		[pathSR moveToPoint:NSMakePoint(dLeftStart, ((dSRVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5))];
-		[pathSS moveToPoint:NSMakePoint(dLeftStart, ((dSSVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5))];
-		[pathDL moveToPoint:NSMakePoint(dLeftStart, ((dDLVal * plotArea.size.height)) + (dMarginY * 1.5))];
+		[pathSR moveToPoint:NSMakePoint(dLeftStart, ((dSRVal * dYScale) - (dMinY * dYScale)) + dMarginY)];
+		[pathSS moveToPoint:NSMakePoint(dLeftStart, ((dSSVal * dYScale) - (dMinY * dYScale)) + dMarginY)];
+		[pathDL moveToPoint:NSMakePoint(dLeftStart, ((dDLVal * plotArea.size.height)) + dMarginY)];
 		
 		int i = 0;
 		for (i = 0; i < nNumValues; i++)
@@ -305,14 +274,14 @@
 			dDuskVal = [pGraphVal getDuskValue];
 			dDLVal = [pGraphVal getDayLengthValue];
 			
-			yPosDawn = ((dDawnVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5);
+			yPosDawn = ((dDawnVal * dYScale) - (dMinY * dYScale)) + dMarginY;
 			if (dDawnVal < 0.0)
 			{
 				yPosDawn = plotArea.origin.y;
 			}
-			yPosSunrise = ((dSRVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5);
-			yPosSunset = ((dSSVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5);
-			yPosDusk = ((dDuskVal * dYScale) - (dMinY * dYScale)) + (dMarginY * 1.5);
+			yPosSunrise = ((dSRVal * dYScale) - (dMinY * dYScale)) + dMarginY;
+			yPosSunset = ((dSSVal * dYScale) - (dMinY * dYScale)) + dMarginY;
+			yPosDusk = ((dDuskVal * dYScale) - (dMinY * dYScale)) + dMarginY;
 			if (dDuskVal < 0.0)
 			{
 				yPosDusk = plotArea.origin.y + plotArea.size.height;
@@ -324,14 +293,11 @@
 			[duskPositions addObject:[NSValue valueWithPoint:NSMakePoint(dXPos, yPosDusk)]];
 			
 			
+			[pathSR lineToPoint:NSMakePoint(dXPos, (dSRVal * dYScale) - (dMinY * dYScale) + dMarginY)];
+			[pathSS lineToPoint:NSMakePoint(dXPos, (dSSVal * dYScale) - (dMinY * dYScale) + dMarginY)];
+			[pathDL lineToPoint:NSMakePoint(dXPos, (dDLVal * plotArea.size.height) + dMarginY)];
 			
-			[pathSR lineToPoint:NSMakePoint(dXPos, (dSRVal * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5))];
-			[pathSS lineToPoint:NSMakePoint(dXPos, (dSSVal * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5))];
-			[pathDL lineToPoint:NSMakePoint(dXPos, (dDLVal * plotArea.size.height) + (dMarginY * 1.5))];
-			
-			
-			
-			// draw X grid value if ness
+			// draw X grid value if needed
 			
 			int nTag = [pGraphVal getXTag];
 			if (nTag != -1)
@@ -341,15 +307,14 @@
 				[XLine lineToPoint:NSMakePoint(dXPos, (plotArea.origin.y + plotArea.size.height))];
 				
 				[[NSColor grayColor] set];
-				
 				[XLine stroke];
 				
 				NSString *strTagText = [self getTag:nTag];
 				
 				NSMutableDictionary *attributes1 = [NSMutableDictionary dictionary];
 				[attributes1 setObject:[NSFont fontWithName:@"Helvetica" size:11] forKey:NSFontAttributeName];
-				
-				[strTagText drawAtPoint:NSMakePoint(dXPos, plotArea.origin.y - 15) withAttributes:attributes1];
+				double textPosX = dXPos - 10.0;
+				[strTagText drawAtPoint:NSMakePoint(textPosX, plotArea.origin.y - 15) withAttributes:attributes1];
 			}
 			dXPos += dInc;
 		}
@@ -371,7 +336,6 @@
 		{
 			NSPoint dawnP = [dawnPositions[i] pointValue];
 			NSPoint sunriseP = [sunrisePositions[i] pointValue];
-			NSPoint sunsetP = [sunsetPositions[i] pointValue];
 			NSPoint duskP = [duskPositions[i] pointValue];
 			
 			[pathNight0 lineToPoint:dawnP];
@@ -387,7 +351,6 @@
 			int reversedIndex = nNumValues - i;
 			
 			NSPoint dawnP = [dawnPositions[reversedIndex] pointValue];
-			NSPoint sunriseP = [sunrisePositions[reversedIndex] pointValue];
 			NSPoint sunsetP = [sunsetPositions[reversedIndex] pointValue];
 			NSPoint duskP = [duskPositions[reversedIndex] pointValue];
 			
@@ -399,10 +362,8 @@
 		
 		//
 		
-		
 		// and plot back to the beginning (bottom right) again to close the shapes.
 		[pathNight0 lineToPoint:NSMakePoint(dLeftStart + plotArea.size.width, plotArea.origin.y)];
-		//[pathDawn lineToPoint:NSMakePoint(dLeftStart + plotArea.size.width, yPosDawn)];
 		
 		[[NSColor colorWithSRGBRed:0.490 green:0.396 blue:0.651 alpha:0.8] set];
 		[pathNight0 fill];
@@ -415,40 +376,42 @@
 		
 		[[NSColor colorWithSRGBRed:0.490 green:0.396 blue:0.651 alpha:0.8] set];
 		[pathNight1 fill];
-		
-		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowSunrise"] == YES)
-		{
-			NSData *colour;
-			colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphSunriseColour"];
-			NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
-			[cColour set];
-			[pathSR stroke];
-		}
-		
-		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowSunset"] == YES)
-		{
-			NSData *colour;
-			colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphSunsetColour"];
-			NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
-			[cColour set];
-			[pathSS stroke];
-		}
-		
-		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowDayLength"] == YES)
-		{
-			NSData *colour;
-			colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphDayLengthColour"];
-			NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
-			[cColour set];
-			[pathDL stroke];
-		}
+	}
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowSunrise"] == YES)
+	{
+		NSData *colour;
+		colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphSunriseColour"];
+		NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+		[cColour set];
+		[pathSR stroke];
+	}
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowSunset"] == YES)
+	{
+		NSData *colour;
+		colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphSunsetColour"];
+		NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+		[cColour set];
+		[pathSS stroke];
+	}
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowDayLength"] == YES)
+	{
+		NSData *colour;
+		colour = [[NSUserDefaults standardUserDefaults] objectForKey:@"GraphDayLengthColour"];
+		NSColor *cColour = [NSKeyedUnarchiver unarchiveObjectWithData:colour];
+		[cColour set];
+		[pathDL stroke];
 	}
 	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowCurrentTime"] == YES)
 	{
 		NSBezierPath* CurrentTimeLine = [NSBezierPath bezierPath];
 		
-		double dYValue = ([self getCurrentAngle] * dYScale) - (dMinY * dYScale) + (dMarginY * 1.5);
+		// TODO: only draw it if within the Y bounds of the plot...
+		
+		double dYValue = ([self getCurrentAngle] * dYScale) - (dMinY * dYScale) + dMarginY;
 		[CurrentTimeLine moveToPoint:NSMakePoint(plotArea.origin.x - 30, dYValue)];
 		[CurrentTimeLine lineToPoint:NSMakePoint((plotArea.origin.x + plotArea.size.width), dYValue)];
 		
