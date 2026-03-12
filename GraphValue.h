@@ -24,7 +24,7 @@
 
 @interface GraphValue : NSObject {
 	NSString *strXTagTitle;
-    
+	
 	// Y values of different variables
 	double dawn;
 	double sunrise;

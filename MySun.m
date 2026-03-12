@@ -32,18 +32,18 @@ const double dMinutesInDay = 60.0 * 24.0;
 
 - (id) init
 {
-    if ((self = [super init]))
-    {        
-        [NSApp setDelegate: (id)self];
-        
-        prefController = [[PrefWindowController alloc] init];
+	if ((self = [super init]))
+	{
+		[NSApp setDelegate: (id)self];
+		
+		prefController = [[PrefWindowController alloc] init];
 		
 		NSNotificationCenter *nc;
 		nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleSettingsChange:) name:@"GeneralSettingsUpdate" object:nil];
 		[nc addObserver:self selector:@selector(handleLocationsChange:) name:@"LocationsSettingsUpdate" object:nil];
-    }
-    return self;
+	}
+	return self;
 }
 
 + (void)initialize
@@ -111,7 +111,7 @@ const double dMinutesInDay = 60.0 * 24.0;
 	
 	[Table reloadData];
 	
-    [Table selectRowIndexes:[NSIndexSet indexSetWithIndex:m_nLastSelected] byExtendingSelection:FALSE];
+	[Table selectRowIndexes:[NSIndexSet indexSetWithIndex:m_nLastSelected] byExtendingSelection:FALSE];
 }
 
 - (void)dealloc
@@ -268,7 +268,7 @@ const double dMinutesInDay = 60.0 * 24.0;
 	int nNumDaysFuture = [Duration1 intValue];
 	
 	[GraphView1 Reset:nNumDaysFuture];
-    
+	
 	NSCalendarDate *nextDate = CalDate;
 	
 	int i = 0;
@@ -460,20 +460,20 @@ double DegToRad(double dAngle)
 	[drawer toggle:sender];
 }
 
-////
+//
 
 - (IBAction)showPreferencesWindow:(id)sender
 {
 	NSWindow * window1 = [prefController window];
-    if (![window1 isVisible])
-        [window1 center];
-	
-    [window1 makeKeyAndOrderFront:self];
+	if (![window1 isVisible])
+		[window1 center];
+
+	[window1 makeKeyAndOrderFront:self];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)application
 {
-    return YES;
+	return YES;
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)app
@@ -513,7 +513,7 @@ double DegToRad(double dAngle)
 		[tempLocs addObject:tempValue];
 	}
 	
-    [prefs setObject:tempLocs forKey:@"Locations"];
+	[prefs setObject:tempLocs forKey:@"Locations"];
 	
 	// Save currently selected location
 	int nSel = [Table selectedRow];
@@ -537,11 +537,10 @@ double DegToRad(double dAngle)
 
 - (void)loadLocations
 {
-	NSDictionary *prefs;
-    
-    prefs = [NSDictionary dictionaryWithContentsOfFile: [@"~/Library/Preferences/SunX.plist" stringByExpandingTildeInPath]];
+	NSDictionary* prefs;
+	prefs = [NSDictionary dictionaryWithContentsOfFile: [@"~/Library/Preferences/SunX.plist" stringByExpandingTildeInPath]];
 	
-    if (prefs)
+	if (prefs)
 	{
 		NSArray *tempLocs;
 		tempLocs = [[prefs objectForKey:@"Locations"] retain];
@@ -565,7 +564,7 @@ double DegToRad(double dAngle)
 			
 			[[LocationController sharedInstance] addLocation:strTitle Lat:dLat Long:dLong TZ:strTimeZone];
 		}
-    }
+	}
 	else
 	{
 		[[LocationController sharedInstance] addLocation:@"Poole" Lat:50.78 Long:-1.85 TZ:@"Europe/London"];
@@ -587,13 +586,13 @@ double DegToRad(double dAngle)
 		[[LocationController sharedInstance] addLocation:@"Buenos Aires" Lat:-34.61 Long:-58.37 TZ:@"America/Argentina/Buenos_Aires"];
 		[[LocationController sharedInstance] addLocation:@"Sydney" Lat:-33.86 Long:151.20 TZ:@"Australia/Sydney"];
 		[[LocationController sharedInstance] addLocation:@"Auckland" Lat:-36.85 Long:174.78 TZ:@"Pacific/Auckland"];
-        [[LocationController sharedInstance] addLocation:@"Wellington" Lat:-41.286 Long:174.776 TZ:@"Pacific/Auckland"];
+		[[LocationController sharedInstance] addLocation:@"Wellington" Lat:-41.286 Long:174.776 TZ:@"Pacific/Auckland"];
 		[[LocationController sharedInstance] addLocation:@"Tokyo" Lat:35.68 Long:139.77 TZ:@"Asia/Tokyo"];
 		[[LocationController sharedInstance] addLocation:@"Hong Kong" Lat:22.32 Long:113.92 TZ:@"Asia/Hong_Kong"];
 		[[LocationController sharedInstance] addLocation:@"Cairo" Lat:30.06 Long:31.36 TZ:@"Africa/Cairo"];
 		[[LocationController sharedInstance] addLocation:@"Nairobi" Lat:-1.28 Long:36.81 TZ:@"Africa/Nairobi"];
 		[[LocationController sharedInstance] addLocation:@"Cape Town" Lat:-33.92 Long:18.42 TZ:@"Africa/Cape_Town"];
-    }	
+	}
 }
 
 - (void)setTwilightType

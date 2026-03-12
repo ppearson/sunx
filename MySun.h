@@ -27,7 +27,7 @@
 
 @interface MySun : NSObject
 {
-    IBOutlet id Date1;
+	IBOutlet id Date1;
 	IBOutlet id TargetTime;
 	IBOutlet id Duration1;
 	NSWindow *window;

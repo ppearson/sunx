@@ -25,9 +25,9 @@
 @interface PrefWindowController : NSWindowController {
 
 	NSUserDefaults * uDefaults;
-    BOOL bHasLoaded;
-    
-    IBOutlet NSView * vGeneralView, * vPieView, * vGraphView, * vLocationsView;
+	BOOL bHasLoaded;
+
+	IBOutlet NSView * vGeneralView, * vPieView, * vGraphView, * vLocationsView;
 	
 	// General
 	IBOutlet NSPopUpButton * fTwilightType;

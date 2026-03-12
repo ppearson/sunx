@@ -29,14 +29,14 @@
 
 - (id)initWithFrame:(NSRect)frame
 {
-    self = [super initWithFrame:frame];
-    if (self)
+	self = [super initWithFrame:frame];
+	if (self)
 	{
-        NSNotificationCenter *nc;
+		NSNotificationCenter *nc;
 		nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleSettingsChange:) name:@"PieSettingsUpdate" object:nil];
-    }
-    return self;
+	}
+	return self;
 }
 
 - (void)dealloc
@@ -50,7 +50,7 @@
 
 - (void)drawRect:(NSRect)rect
 {
-    NSRect bounds = [self bounds];
+	NSRect bounds = [self bounds];
 	[[NSColor whiteColor] set];
 	[NSBezierPath fillRect:bounds];
 	[[NSColor blackColor] set];

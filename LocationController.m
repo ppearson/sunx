@@ -27,76 +27,76 @@
 static LocationController *sharedInstance = nil;
 + (LocationController *)sharedInstance
 {
-    return sharedInstance ? sharedInstance : [[self alloc] init];
+	return sharedInstance ? sharedInstance : [[self alloc] init];
 }
 
 - (id)init
 {
-    if (sharedInstance)
+	if (sharedInstance)
 	{
-        [self release];
+		[self release];
 	}
 	else if (self = [super init])
 	{
-        sharedInstance = self;
-        aLocations = [[NSMutableArray alloc] init];
-    }
-    return sharedInstance;
+		sharedInstance = self;
+		aLocations = [[NSMutableArray alloc] init];
+	}
+	return sharedInstance;
 }
 
 - (void)dealloc
 {
-    [aLocations release];
-    [super dealloc];
+	[aLocations release];
+	[super dealloc];
 }
 
 - (NSArray *)allLocations
 {
-    return aLocations;
+	return aLocations;
 }
 
 - (LocationValue *)locationWithTitle:(NSString *)title
 {
-    if ([self indexOfLocationWithTitle:title] == -1)
-    {
-        return nil;
-    }
-    else
+	if ([self indexOfLocationWithTitle:title] == -1)
 	{
-        return [aLocations objectAtIndex:[self indexOfLocationWithTitle:title]];
-    }
+		return nil;
+	}
+	else
+	{
+		return [aLocations objectAtIndex:[self indexOfLocationWithTitle:title]];
+	}
 }
 
 - (LocationValue *)locationAtIndex:(int)index
 {
-    if (index >= 0 && index < [aLocations count])
-    {
-        return [aLocations objectAtIndex:index];
-    }
+	if (index >= 0 && index < [aLocations count])
+	{
+		return [aLocations objectAtIndex:index];
+	}
 	else
 	{
-        return nil;
-    }
+		return nil;
+	}
 }
 
 - (int)indexOfLocationWithTitle:(NSString *)title
 {
-    int i;
-    for (i = 0; i < [aLocations count]; i++)
-    {
-        if ([title isEqualToString:[[aLocations objectAtIndex:i] getTitle]])
-        {
-            return i;
-        }
-    }
+	int i;
+	for (i = 0; i < [aLocations count]; i++)
+	{
+		if ([title isEqualToString:[[aLocations objectAtIndex:i] getTitle]])
+		{
+			return i;
+		}
+	}
 
-    return -1;
+	return -1;
 }
 
 - (void)removeLocationAtIndex:(int)index
 {
-    LocationValue *remove = [aLocations objectAtIndex:index];
-    
+	LocationValue *remove = [aLocations objectAtIndex:index];
+
 	[aLocations removeObject:remove];
 }
 

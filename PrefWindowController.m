@@ -126,17 +126,17 @@
 
 - (NSArray *) toolbarSelectableItemIdentifiers: (NSToolbar *) toolbar
 {
-    return [self toolbarDefaultItemIdentifiers: toolbar];
+	return [self toolbarDefaultItemIdentifiers: toolbar];
 }
 
 - (NSArray *) toolbarDefaultItemIdentifiers: (NSToolbar *) toolbar
 {
-    return [self toolbarAllowedItemIdentifiers: toolbar];
+	return [self toolbarAllowedItemIdentifiers: toolbar];
 }
 
 - (NSArray *) toolbarAllowedItemIdentifiers: (NSToolbar *) toolbar
 {
-    return [NSArray arrayWithObjects: TOOLBAR_GENERAL, TOOLBAR_PIE, TOOLBAR_GRAPH, TOOLBAR_LOCATIONS, nil];
+	return [NSArray arrayWithObjects: TOOLBAR_GENERAL, TOOLBAR_PIE, TOOLBAR_GRAPH, TOOLBAR_LOCATIONS, nil];
 }
 
 - (void)windowDidLoad

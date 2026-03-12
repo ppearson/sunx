@@ -27,8 +27,8 @@
 
 - (id)initWithFrame:(NSRect)frame
 {
-    self = [super initWithFrame:frame];
-    if (self)
+	self = [super initWithFrame:frame];
+	if (self)
 	{
 		aGraphValues = [[NSMutableArray alloc] init];
 		
