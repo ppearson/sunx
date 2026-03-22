@@ -86,9 +86,7 @@
 		nNumValues = nDaysToShow;
 	}
 	
-	double dInc = plotArea.size.width / nNumValues;
-	
-	/////
+	double dInc = plotArea.size.width / (nNumValues - 1);
 	
 	double dMaxY = 0.0;
 	double dMinY = 360.0;
@@ -196,8 +194,7 @@
 		[pathSS moveToPoint:NSMakePoint(dLeftStart, ((dSSVal * dYScale) - (dMinY * dYScale)) + dMarginY)];
 		[pathDL moveToPoint:NSMakePoint(dLeftStart, ((dDLVal * plotArea.size.height)) + dMarginY)];
 		
-		int i = 0;
-		for (i = 0; i < nNumValues; i++)
+		for (int i = 1; i < nNumValues; i++)
 		{
 			pGraphVal = [self getGraphValue:i];
 			dSRVal = [pGraphVal getSunriseValue];
@@ -264,8 +261,7 @@
 		[pathSS moveToPoint:NSMakePoint(dLeftStart, ((dSSVal * dYScale) - (dMinY * dYScale)) + dMarginY)];
 		[pathDL moveToPoint:NSMakePoint(dLeftStart, ((dDLVal * plotArea.size.height)) + dMarginY)];
 		
-		int i = 0;
-		for (i = 0; i < nNumValues; i++)
+		for (int i = 1; i < nNumValues; i++)
 		{
 			pGraphVal = [self getGraphValue:i];
 			dDawnVal = [pGraphVal getDawnValue];
@@ -332,7 +328,7 @@
 		[pathNight1 lineToPoint:NSMakePoint(dLeftStart, plotArea.origin.y + plotArea.size.height)];
 		
 		// plot from left to right at the top of the area
-		for (i = 0; i < nNumValues + 1; i++)
+		for (int i = 0; i < nNumValues; i++)
 		{
 			NSPoint dawnP = [dawnPositions[i] pointValue];
 			NSPoint sunriseP = [sunrisePositions[i] pointValue];
@@ -346,9 +342,9 @@
 		[pathNight1 lineToPoint:NSMakePoint(plotArea.origin.x + plotArea.size.width, plotArea.origin.y + plotArea.size.height)];
 		
 		// then plot from right to left along the bottom of the area, basically reversing the source points
-		for (i = 0; i < nNumValues + 1; i++)
+		for (int i = 0; i < nNumValues; i++)
 		{
-			int reversedIndex = nNumValues - i;
+			int reversedIndex = nNumValues - i - 1;
 			
 			NSPoint dawnP = [dawnPositions[reversedIndex] pointValue];
 			NSPoint sunsetP = [sunsetPositions[reversedIndex] pointValue];
@@ -407,11 +403,12 @@
 	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GraphShowCurrentTime"] == YES)
 	{
-		NSBezierPath* CurrentTimeLine = [NSBezierPath bezierPath];
-		
-		// TODO: only draw it if within the Y bounds of the plot...
-		
 		double dYValue = ([self getCurrentAngle] * dYScale) - (dMinY * dYScale) + dMarginY;
+		// only draw current time line if it's within the Y bounds of the plot...
+		if (dYValue < plotArea.origin.y || dYValue > plotArea.origin.y + plotArea.size.height)
+			return;
+		
+		NSBezierPath* CurrentTimeLine = [NSBezierPath bezierPath];
 		[CurrentTimeLine moveToPoint:NSMakePoint(plotArea.origin.x - 30, dYValue)];
 		[CurrentTimeLine lineToPoint:NSMakePoint((plotArea.origin.x + plotArea.size.width), dYValue)];
 		
